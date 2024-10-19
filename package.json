@@ -1,0 +1,13 @@
+{
+  "name": "savance",
+  "version": "0.0.1",
+  "description": "void",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^33.0.1",
+    "electron-reload": "^2.0.0-alpha.1"
+  }
+}
