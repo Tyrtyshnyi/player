@@ -2,9 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Музыкальный плеер</title>
+    <link rel="stylesheet" href="MainWindow.css"> <!-- Используем относительный путь -->
 </head>
 <body>
+<div id="player">
+    <h1>Музыкальный плеер</h1>
+    <audio id="audio" controls>
+        <source id="audioSource" src="" type="audio/mpeg">
+        Ваш браузер не поддерживает элемент audio.
+    </audio>
 
+    <div id="playlist">
+        <h2>Плейлист</h2>
+        <ul id="trackList">
+            <!-- Здесь будут элементы плейлиста -->
+        </ul>
+    </div>
+
+    <div id="controls">
+        <button id="play">Воспроизвести</button>
+        <button id="pause">Пауза</button>
+        <button id="stop">Стоп</button>
+        <button id="next">Следующий трек</button>
+        <button id="prev">Предыдущий трек</button>
+    </div>
+</div>
+
+<script src="MainWindow.js"></script> <!-- Подключение JavaScript -->
 </body>
 </html>

@@ -12,12 +12,13 @@ function createWindow () {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    autoHideMenuBar: true, // Убираем верхнее меню
     webPreferences: {
       nodeIntegration: true
     }
   });
 
-  win.loadFile('index.html');
+  win.loadFile('MainWindow/MainWindow.html');
 }
 
 app.whenReady().then(createWindow);
