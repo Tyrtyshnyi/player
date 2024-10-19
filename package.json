@@ -2,7 +2,7 @@
   "name": "savance",
   "version": "0.0.1",
   "description": "void",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
     "start": "electron ."
   },
