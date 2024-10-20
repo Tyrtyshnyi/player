@@ -9,16 +9,16 @@ require('electron-reload')(__dirname, {
 
 
 function createWindow () {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    autoHideMenuBar: true, // Убираем верхнее меню
+  const mainWindow = new BrowserWindow({
+    resizable: true,
     webPreferences: {
       nodeIntegration: true
     }
   });
-
-  win.loadFile('MainWindow/MainWindow.html');
+  mainWindow.loadFile('MainWindow/MainWindow.html');
+  mainWindow.setMenu(null);
+  mainWindow.maximize();
+  mainWindow.setMinimumSize(1000, 800);
 }
 
 app.whenReady().then(createWindow);
