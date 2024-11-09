@@ -3,16 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>savance</title>
+    <title>Music</title>
     <link rel="stylesheet" href="MainWindow.css"> <!-- Используем относительный путь -->
     <script src="MainWindow.js"></script> <!-- Подключение JavaScript -->
 </head>
 <body>
 
-    <div class="left-panel">
-            <button class="left-panel-button"> Tracks</button>
-            <button class="left-panel-button"> Playlists</button>
+<div class="left-panel">
+    <button class="left-panel-button"> Tracks</button>
+    <button class="left-panel-button"> Playlists</button>
+</div>
+
+
+<!-- Плеер внизу окна -->
+<div class="player">
+    <div class="track-info">
+        <img src="" alt="/-/" class="track-cover">
+        <div class="track-meta">
+            <div class="track-title">LIFE LIKE THIS</div>
+            <div class="track-artist">IVOXYGEN</div>
+        </div>
     </div>
+
+    <div class="progress-container">
+        <span id="current-time">01:26</span>
+        <input type="range" id="progress-bar" value="45" min="0" max="100">
+        <span id="total-time">03:16</span>
+    </div>
+
+
+
+    <div class="controls">
+
+        <button id="prev-btn" class="control-btn">
+            <svg fill="none" stroke="#000000" height="30px" width="48px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 19V5L2 12l9 7zm11 0V5l-9 7l9 7z" stroke-width="1"/>
+            </svg>
+        </button>
+
+        <button id="play-btn" class="control-btn">
+            <svg class="svg" fill="none" stroke="#0b0b0b" height="30px" width="48px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 5v14l11-7z" stroke-width="1"/>
+            </svg>
+        </button>
+
+        <button  id="pause-btn" class="control-btn">
+            <svg  fill="none" stroke="#000000" height="30px" width="48px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 19h4V5H6zm8-14v14h4V5z" stroke-width="1"/>
+            </svg>
+        </button>
+
+        <button id="next-btn" class="control-btn">
+            <svg fill="none" stroke="#000000" height="30px" width="48px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 4l9 8-9 8V4zm10 0l9 8-9 8V4z" stroke-width="1"/>
+            </svg>
+        </button>
+
+        <button id="repeat-btn" class="control-btn">
+            <svg fill="none" stroke="#000000" height="48px" width="48px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 1l4 4-4 4M3 11v4c0 1.656 1.344 3 3 3h12M7 23l-4-4 4-4m14-2V9c0-1.656-1.344-3-3-3H5" stroke-width="1"/>
+            </svg>
+        </button>
+
+        <button id="shuffle-btn" class="control-btn">🔀</button>
+
+    </div>
+
+
+
+    <div class="volume-settings">
+        <button id="volume-icon" class="control-btn">🔊</button>
+        <input type="range" id="volume-bar" min="0" max="100" value="50">
+    </div>
+</div>
 
 </body>
 </html>

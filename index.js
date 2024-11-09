@@ -11,6 +11,10 @@ require('electron-reload')(__dirname, {
 function createWindow () {
   const mainWindow = new BrowserWindow({
     resizable: true,
+    // transparent: true,  // Сделать окно прозрачным
+    // frame: false,       // Убрать стандартную рамку окна
+    // hasShadow: false,
+    // backgroundColor: '#00005000',
     webPreferences: {
       nodeIntegration: true
     }
@@ -34,3 +38,48 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
