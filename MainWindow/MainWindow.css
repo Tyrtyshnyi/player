@@ -59,12 +59,12 @@ body {
     user-select: none;
     height: 100%;
     width: 200px;
-    padding: 10px;
+    padding: 8px;
     margin: 10px;
     background-color: var(--var--background-1);
     border: var(--var--border);
     box-shadow: var(--var--box-shadow);
-    border-radius: var( --var--border-radius-hight);
+    border-radius: 24px;
     overflow: hidden;
     box-sizing: border-box; /* Учитываем отступы и границы в общей высоте */
     display: flex;          /* Используем flexbox */
@@ -88,9 +88,9 @@ body {
     border: var(--var--border);
     box-shadow: var( --var-box-shadow-buttons);
     background-color: transparent;
-    border-radius: var(--var--border-radius-low);
+    border-radius: 16px;
     padding: 10px;
-    margin: 10px 0 10px 0;
+    margin: 0 0 10px 0;
 
     transition: var(--var--transition-fast);
     /*outline: 1px solid red;*/
@@ -103,6 +103,19 @@ body {
 }
 
 
+.home-button{
+    background-color: var(--var--background-3);
+    margin-bottom: 50px;
+    /*width: 75%;*/
+}
+
+
+
+
+
+
+
+
 /* Плеер */
 .player {
     user-select: none;
@@ -113,15 +126,16 @@ body {
     width: calc(100% - 230px); /* Задаем ширину оставшегося пространства */
 
     border: var(--var--border);
-    height: 60px;
+    height: 80px;
     background: var(--var--background-1);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px;
+    padding: 8px;
+    border-radius: 24px;
     box-shadow: var(--var--box-shadow);
     box-sizing: border-box;
-    border-radius: var(--var--border-radius-low);
+
     transition: var(--var--transition-slow);
     /*outline: solid 1px #505050;*/
 }
@@ -131,25 +145,29 @@ body {
     box-shadow: none;
 }
 
-
 .track-info {
     display: flex;
     align-items: center;
 
-    outline: solid 1px #505050;
+    /*outline: solid 1px #505050;*/
 }
 
 .track-cover {
     background-color: var(--var--background-main);
-    width: 50px;
-    height: 50px;
-    border-radius: var(--var--border-radius-veryLow);
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
     margin-right: 10px;
+    box-shadow: var(--var--box-shadow);
     border: var(--var--border);
+    transition: var(--var--transition-slow);
     /*outline: solid 1px #505050;*/
 }
-
+.track-cover:hover{
+    box-shadow: none;
+}
 .track-meta {
+    width: 150px;
     overflow: hidden; /* Обрезка текста */
     text-overflow: ellipsis; /* Добавление многоточия */
     white-space: nowrap; /* Запрет переноса текста */
@@ -158,116 +176,114 @@ body {
     user-select: text;
     display: flex;
     flex-direction: column;
+    position: relative; /* Относительное позиционирование */
+    margin-right: 20px;
 
     /*outline: solid 1px #505050;*/
+}
+
+.track-meta:hover .scrolling-text {
+    animation: scrollText 10s linear infinite; /* Анимация запускается при наведении мыши */
 }
 
 .track-title {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 10px;
+
+    display: inline-block;
+    white-space: nowrap; /* Отключаем перенос текста */
+    will-change: transform; /* Оптимизация для анимации */
+    animation: none; /* По умолчанию анимация выключена */
     /*outline: solid 1px #505050;*/
 }
 
 .track-artist {
     font-size: 12px;
-    color: #d3d3d3;
+    color: #9a9a9a;
 }
 
-.controls {
-    overflow: hidden; /* Обрезка текста */
-    white-space: nowrap; /* Запрет переноса текста */
-    height: 40px;
+
+
+
+.main-controls {
+    height: 80px; /* Высота может быть адаптивной */
+    width: 50%;
+    margin: 0 auto; /* Центрируем основной блок относительно родителя */
     display: flex;
-    align-items: center;
-    /*outline: solid 1px #505050;*/
+    flex-direction: column; /* Элементы внутри будут расположены вертикально */
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    /*outline: solid 1px #505050*/
+}
+
+.controls-track-local {
+    display: flex; /* Используем flex для кнопок управления */
+    justify-content: center; /* Центрируем кнопки внутри блока */
+    /*gap: 5px; !* Отступы между кнопками *!*/
+    width: 100%; /* Занимает всю ширину родительского контейнера */
+    margin: 15px 0 10px 0;
 }
 
 .control-btn {
-    height: 40px;
     background: transparent;
     border: none;
-    font-size: 24px;
-    margin: 0 10px;
+    /*font-size: 24px;*/
     cursor: pointer;
+    margin:0 10px 0 10px;
     /*outline: solid 1px #505050;*/
 }
 
-.control-btn:hover {
-    color: #ccc;
-}
-
-.controls-track-local{
-    margin: 0;
-    /*border-right: 1px solid black;*/
-    /*padding: 5px 0 0 0 ;*/
-    /*outline: solid 1px #505050;*/
-}
-.controls-track-global{
-    margin: 0 20px 0 20px;
-    /*outline: solid 1px #505050;*/
-}
 .play-btn{
-    /*margin:0 -17px 0 -10px;*/
-    margin:0 0 0 0;
+
 }
 
 .pause-btn{
-    display:none;
+    display: none;
 }
 
 
 
-
-
-
-/* Контейнер для прогресс-бара */
 .progress-container {
     display: flex;
     align-items: center;
-    width: 60%;
+    justify-content: center; /* Центрируем прогресс-бар и текст внутри */
+    width: 100%;
     color: #d3d3d3;
     font-size: 12px;
-    gap:10px;
+    gap: 10px; /* Расстояние между временем и прогресс-баром */
 }
 
-/* Основной прогресс-бар */
 .progress-bar {
     position: relative;
-    height: 6px; /* Высота линии прогресса */
-    width: 100%; /* Ширина прогресс-бара */
-    background-color: var(--var--background-3); /* Цвет незаполненной части */
+    height: 6px;
+    width: 100%;
+    background-color: var(--var--background-main);
     border-radius: 10px;
     cursor: pointer;
-    margin: 0 10px;
 }
 
-/* Заполненная часть прогресс-бара */
 .lineChild {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%; /* Заполненная часть должна быть такой же высоты, как и основной прогресс-бар */
-    width: 50%; /* Динамически изменяемая ширина для отражения заполненной части */
-    background-color: var(--var--background-main); /* Цвет заполненной части */
+    height: 100%;
+    background-color: var(--var--background-3);
     border-radius: 10px;
-    /*transition: width 0.1s ease-in-out;*/
 }
 
-/* Бегунок */
 .lineChild::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    height: 12px;
-    width: 12px;
-    background-color: black; /* Цвет бегунка */
-    border-radius: 50%;
+    background-color: transparent;
     cursor: pointer;
 }
 
+
+
+
+
+.controls-track-global{
+     margin-right: 5%;
+
+}
 
 
 
@@ -278,13 +294,6 @@ body {
     gap: 5px; /* Расстояние между иконкой и ползунком */
 }
 
-/* Иконка громкости */
-.control-btn {
-    background: transparent;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-}
 
 /* Контейнер для полосы громкости */
 .volume-bar {

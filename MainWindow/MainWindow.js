@@ -5,7 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalTimeElement = document.getElementById('total-time');
 
     let totalDuration = 196; // Общее время трека в секундах (примерно 03:16)
-    let currentTime = 50; // Начальное значение текущего времени
+    let currentTime = 0; // Начальное значение текущего времени
+
+
 
     // Функция обновления прогресс-бара и времени
     function updateProgressBar(current) {
