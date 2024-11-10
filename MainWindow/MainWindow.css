@@ -1,48 +1,70 @@
-html, body {
-    height: 99%; /* Задаем высоту 100% для html и body */
-    margin: 0;    /* Убираем отступы */
+@font-face {
+    font-family: 'Exo2';
+    src: url('../fonts/Exo_2/static/Exo2-Thin.ttf') format('truetype');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Exo_2', sans-serif;
+    font-weight: 100;
+    font-size: 14px;
 }
 
 :root{
-    --var--border-radius:20px;
-
-    --var--border-radius-buttons:10px;
+    --var--border-radius-hight:20px;
+    --var--border-radius-medium:15px;
+    --var--border-radius-low:10px;
+    --var--border-radius-veryLow:5px;
 
     --var--box-shadow: 0 5px 10px rgba(0, 0, 0, 0.48);
     --var-box-shadow-buttons: 0 2px 10px rgba(0, 0, 0, 0.32);
     --var--border: 1px solid #505050;
 
+
     --var--background-main: #191919;
     --var--background-1: #202020;
     --var--background-2: #262626;
+    --var--background-3: #505050;
+
 
     --var--transition-slow: 0.5s ease-in-out;
     --var--transition-medium: 0.3s ease-in-out;
     --var--transition-fast: 0.1s ease-in-out;
 }
 
+
+html, body {
+    height: 99%; /* Задаем высоту 100% для html и body */
+    margin: 0;    /* Убираем отступы */
+    outline: none;
+}
+
 body {
-    font-family: Helvetica, sans-serif;
+    font-family: 'Exo_2', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: #ffffff;
+    text-decoration:none;
     background-color: var(--var--background-main);
     margin: 0;
     padding: 0;
-    text-decoration:none;
-    color: #ffffff;
+
 }
 
-.svg{
-    color:red;
-    /*margin: 40px;*/
-}
+
 .left-panel{
-    height: 99%; /* Занимает всю высоту */
+
+    user-select: none;
+    height: 100%;
     width: 200px;
     padding: 10px;
     margin: 10px;
-    background-color: #202020;
+    background-color: var(--var--background-1);
     border: var(--var--border);
     box-shadow: var(--var--box-shadow);
-    border-radius: var(--var--border-radius);
+    border-radius: var( --var--border-radius-hight);
     overflow: hidden;
     box-sizing: border-box; /* Учитываем отступы и границы в общей высоте */
     display: flex;          /* Используем flexbox */
@@ -66,58 +88,74 @@ body {
     border: var(--var--border);
     box-shadow: var( --var-box-shadow-buttons);
     background-color: transparent;
-    border-radius: var( --var--border-radius-buttons);
+    border-radius: var(--var--border-radius-low);
     padding: 10px;
     margin: 10px 0 10px 0;
 
-    transition: var(--var--transition-medium);
+    transition: var(--var--transition-fast);
     /*outline: 1px solid red;*/
 }
 
 .left-panel-button:hover{
     border: 1px solid #6c6c6c;
     box-shadow: 0 0 0 0 transparent;
-    transition: var(--var--transition-medium);
+    transition: var(--var--transition-fast);
 }
 
 
 /* Плеер */
 .player {
+    user-select: none;
     position: absolute; /* Плеер теперь размещен с помощью absolute */
     bottom: 0;
-    margin: 20px;
+    margin: 10px;
     left: 210px; /* Сдвигаем плеер на ширину левой панели */
-    width: calc(100% - 250px); /* Задаем ширину оставшегося пространства */
+    width: calc(100% - 230px); /* Задаем ширину оставшегося пространства */
 
     border: var(--var--border);
     height: 60px;
-    background: #252525;
+    background: var(--var--background-1);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 30px;
+    padding: 15px;
     box-shadow: var(--var--box-shadow);
     box-sizing: border-box;
-
-    border-radius: var(--var--border-radius);
+    border-radius: var(--var--border-radius-low);
+    transition: var(--var--transition-slow);
+    /*outline: solid 1px #505050;*/
 }
+
+.player:hover{
+    background-color: var(--var--background-2);
+    box-shadow: none;
+}
+
 
 .track-info {
     display: flex;
     align-items: center;
 
-    /*outline: solid 1px #505050;*/
-}
-
-.track-cover {
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
-    margin-right: 10px;
     outline: solid 1px #505050;
 }
 
+.track-cover {
+    background-color: var(--var--background-main);
+    width: 50px;
+    height: 50px;
+    border-radius: var(--var--border-radius-veryLow);
+    margin-right: 10px;
+    border: var(--var--border);
+    /*outline: solid 1px #505050;*/
+}
+
 .track-meta {
+    overflow: hidden; /* Обрезка текста */
+    text-overflow: ellipsis; /* Добавление многоточия */
+    white-space: nowrap; /* Запрет переноса текста */
+    margin-left: 10px;
+    cursor: pointer;
+    user-select: text;
     display: flex;
     flex-direction: column;
 
@@ -137,40 +175,148 @@ body {
 }
 
 .controls {
+    overflow: hidden; /* Обрезка текста */
+    white-space: nowrap; /* Запрет переноса текста */
+    height: 40px;
     display: flex;
     align-items: center;
     /*outline: solid 1px #505050;*/
 }
 
 .control-btn {
+    height: 40px;
     background: transparent;
     border: none;
     font-size: 24px;
-    margin: 0 5px;
+    margin: 0 10px;
     cursor: pointer;
+    /*outline: solid 1px #505050;*/
 }
 
 .control-btn:hover {
     color: #ccc;
 }
 
+.controls-track-local{
+    margin: 0;
+    /*border-right: 1px solid black;*/
+    /*padding: 5px 0 0 0 ;*/
+    /*outline: solid 1px #505050;*/
+}
+.controls-track-global{
+    margin: 0 20px 0 20px;
+    /*outline: solid 1px #505050;*/
+}
+.play-btn{
+    /*margin:0 -17px 0 -10px;*/
+    margin:0 0 0 0;
+}
+
+.pause-btn{
+    display:none;
+}
+
+
+
+
+
+
+/* Контейнер для прогресс-бара */
 .progress-container {
     display: flex;
     align-items: center;
-    width: 30%;
+    width: 60%;
+    color: #d3d3d3;
+    font-size: 12px;
+    gap:10px;
 }
 
-#progress-bar {
-    width: 100%;
+/* Основной прогресс-бар */
+.progress-bar {
+    position: relative;
+    height: 6px; /* Высота линии прогресса */
+    width: 100%; /* Ширина прогресс-бара */
+    background-color: var(--var--background-3); /* Цвет незаполненной части */
+    border-radius: 10px;
+    cursor: pointer;
     margin: 0 10px;
 }
 
+/* Заполненная часть прогресс-бара */
+.lineChild {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%; /* Заполненная часть должна быть такой же высоты, как и основной прогресс-бар */
+    width: 50%; /* Динамически изменяемая ширина для отражения заполненной части */
+    background-color: var(--var--background-main); /* Цвет заполненной части */
+    border-radius: 10px;
+    /*transition: width 0.1s ease-in-out;*/
+}
+
+/* Бегунок */
+.lineChild::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    height: 12px;
+    width: 12px;
+    background-color: black; /* Цвет бегунка */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+
+
+/* Контейнер настроек громкости */
 .volume-settings {
     display: flex;
     align-items: center;
+    gap: 5px; /* Расстояние между иконкой и ползунком */
 }
 
-#volume-bar {
-    width: 100px;
-    margin-left: 10px;
+/* Иконка громкости */
+.control-btn {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Контейнер для полосы громкости */
+.volume-bar {
+    position: relative;
+    height: 7px; /* Высота линии громкости */
+    width: 100px; /* Ширина громкости */
+    background-color: #707070; /* Цвет фона (незаполненная часть) */
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Заполненная часть полосы громкости */
+.volume-level {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%; /* Заполненная часть должна быть такой же высоты, как и основной трек */
+    width: 50%; /* Начальная громкость - 50% */
+    background-color: lightgrey; /* Цвет заполненной части */
+    border-radius: 10px;
+}
+
+/* Бегунок громкости */
+.volume-level::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    height: 12px;
+    width: 12px;
+    background-color: black; /* Цвет бегунка */
+    border-radius: 50%;
+    cursor: pointer;
 }
