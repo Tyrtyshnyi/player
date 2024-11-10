@@ -13,20 +13,22 @@
 }
 
 :root{
-    --var--border-radius-hight:20px;
-    --var--border-radius-medium:15px;
-    --var--border-radius-low:10px;
-    --var--border-radius-veryLow:5px;
+    --var--outer-radius: 24px;
+    --var--inner-radius: 16px;
+
+    --var--padding:8px;
 
     --var--box-shadow: 0 5px 10px rgba(0, 0, 0, 0.48);
     --var-box-shadow-buttons: 0 2px 10px rgba(0, 0, 0, 0.32);
+
     --var--border: 1px solid #505050;
 
 
-    --var--background-main: #191919;
-    --var--background-1: #202020;
-    --var--background-2: #262626;
+    --var--background-main: #202020;
+    --var--background-1: #252525;
+    --var--background-2: #2f2f2f;
     --var--background-3: #505050;
+    --var--background-accent-1: linear-gradient(to top left, #f95666, #4e60f7);
 
 
     --var--transition-slow: 0.5s ease-in-out;
@@ -59,12 +61,12 @@ body {
     user-select: none;
     height: 100%;
     width: 200px;
-    padding: 8px;
+    padding: var(--var--padding);
     margin: 10px;
     background-color: var(--var--background-1);
     border: var(--var--border);
     box-shadow: var(--var--box-shadow);
-    border-radius: 24px;
+    border-radius: var(--var--outer-radius);
     overflow: hidden;
     box-sizing: border-box; /* Учитываем отступы и границы в общей высоте */
     display: flex;          /* Используем flexbox */
@@ -87,8 +89,8 @@ body {
     color: white;
     border: var(--var--border);
     box-shadow: var( --var-box-shadow-buttons);
-    background-color: transparent;
-    border-radius: 16px;
+    background-color: var(--var--background-1);
+    border-radius: var(--var--inner-radius);
     padding: 10px;
     margin: 0 0 10px 0;
 
@@ -104,7 +106,7 @@ body {
 
 
 .home-button{
-    background-color: var(--var--background-3);
+    background-image:var(--var--background-accent-1);
     margin-bottom: 50px;
     /*width: 75%;*/
 }
@@ -132,7 +134,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 8px;
-    border-radius: 24px;
+    border-radius: var(--var--outer-radius);
     box-shadow: var(--var--box-shadow);
     box-sizing: border-box;
 
@@ -156,7 +158,7 @@ body {
     background-color: var(--var--background-main);
     width: 64px;
     height: 64px;
-    border-radius: 16px;
+    border-radius: var(--var--inner-radius);
     margin-right: 10px;
     box-shadow: var(--var--box-shadow);
     border: var(--var--border);
@@ -166,6 +168,8 @@ body {
 .track-cover:hover{
     box-shadow: none;
 }
+
+
 .track-meta {
     width: 150px;
     overflow: hidden; /* Обрезка текста */
@@ -178,7 +182,6 @@ body {
     flex-direction: column;
     position: relative; /* Относительное позиционирование */
     margin-right: 20px;
-
     /*outline: solid 1px #505050;*/
 }
 
@@ -216,12 +219,18 @@ body {
     /*outline: solid 1px #505050*/
 }
 
+
 .controls-track-local {
     display: flex; /* Используем flex для кнопок управления */
     justify-content: center; /* Центрируем кнопки внутри блока */
     /*gap: 5px; !* Отступы между кнопками *!*/
     width: 100%; /* Занимает всю ширину родительского контейнера */
     margin: 15px 0 10px 0;
+}
+
+.controls-track-global{
+    margin-right: 5%;
+
 }
 
 .control-btn {
@@ -243,47 +252,49 @@ body {
 
 
 
-.progress-container {
+.timecode-container {
     display: flex;
     align-items: center;
-    justify-content: center; /* Центрируем прогресс-бар и текст внутри */
+    gap: 10px;
     width: 100%;
+}
+
+.timecode-start,
+.timecode-end {
+    font-size: 14px;
     color: #d3d3d3;
-    font-size: 12px;
-    gap: 10px; /* Расстояние между временем и прогресс-баром */
 }
 
-.progress-bar {
-    position: relative;
-    height: 6px;
+.timecode-slider {
+    -webkit-appearance: none;
+    appearance: none;
     width: 100%;
-    background-color: var(--var--background-main);
+    height: 6px;
+    background-image: linear-gradient(to right, #707070, #424242);
     border-radius: 10px;
+    outline: none;
     cursor: pointer;
+    transition: background 0.3s ease-in-out;
 }
 
-.lineChild {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background-color: var(--var--background-3);
-    border-radius: 10px;
-}
 
-.lineChild::after {
-    background-color: transparent;
+.timecode-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
     cursor: pointer;
-}
-
-
-
-
-
-.controls-track-global{
-     margin-right: 5%;
 
 }
+
+
+
+
+
+
+
 
 
 
@@ -328,4 +339,37 @@ body {
     background-color: black; /* Цвет бегунка */
     border-radius: 50%;
     cursor: pointer;
+}
+
+
+
+/* Основной контент, который отображает содержимое вкладок */
+.main-content {
+    position: absolute;
+    top: 10px; /* Расстояние от верхней части окна */
+    left: 220px; /* Отодвигаем на ширину левой панели */
+    right: 10px; /* Отступ справа */
+    bottom: 100px; /* Отступ сверху над плеером */
+    background: var(--var--background-1);
+    border-radius: var(--var--outer-radius);
+    /*padding: var(--var--padding);*/
+    padding: 10px;
+    overflow: auto; /* Добавляем прокрутку, если контент не помещается */
+    border: var(--var--border);
+
+    /*outline:1px solid red;*/
+}
+
+.main-content:hover{
+
+}
+
+/* Вкладки по умолчанию скрыты */
+.tab-content {
+    display: none;
+}
+
+/* Активная вкладка отображается */
+.tab-content.active {
+    display: block;
 }
