@@ -22,8 +22,23 @@
 }
 
 
-
-
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    25% {
+        background-position: 50% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    75% {
+        background-position: 50% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
 
 
 .blur-search-container{
@@ -97,6 +112,12 @@
 
 }
 
+.item-track.playing {
+    background: var(--var-item-track-playng);
+    background-size: 400% 400%;
+    animation: gradientShift 10s infinite normal; /* настраиваем анимацию */
+    box-shadow: var(--var--box-shadow);
+}
 
 
  /*Обложка трек */

@@ -18,9 +18,21 @@
     --var--background-5: #a6a6a6;
 
 
-    --var--background-accent-1: linear-gradient(to top left, #f95666, #4e60f7);
-    --var--background-accent-2: linear-gradient(to top left, #56f9eb, #4e60f7);
+    --var--background-accent-1: linear-gradient(276deg, #db56f9, #a93ac7, #5469ff);
+    --var--background-accent-2: linear-gradient(to bottom left, #00eaff, #214a91, #001c3a);
     --var--background-accent-3: linear-gradient(to right, #3a3a3a, #575757);
+    --var-item-track-playng: linear-gradient(135deg,
+    #214a91,
+    #004b96,
+    #00638d,
+    #00838d,
+    #00a0c4,
+    #009caf,
+    #00aab9,
+    #1c80c4,
+    #2556ab,
+    #214a91
+    );
 
     --var--transition-slow: 0.5s ease-in-out;
     --var--transition-medium: 0.3s ease-in-out;

@@ -27,10 +27,7 @@ body {
     background-color: var(--var--background-main);
     margin: 0;
     padding: 0;
-
 }
-
-
 
 
 .left-panel{
@@ -88,11 +85,27 @@ body {
     transform: scale(0.95);
 }
 
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
 .home-button{
-    background-image:var(--var--background-accent-1);
-    margin-bottom: 50px;
+    background: var(--var--background-accent-1);
+    background-size: 150% 150%;
+    animation: gradientShift 10s infinite normal; /* настраиваем анимацию */
     box-shadow: var(--var--box-shadow);
-    transition: var(--var--transition-fast);
+    margin-bottom: 50px;
     /*width: 75%;*/
 }
 
@@ -131,21 +144,25 @@ body {
 .player:hover{
     background-color: var(--var--background-2);
     box-shadow: none;
+
 }
+
+
 
 .track-info {
     display: flex;
     align-items: center;
+    width: 20%;
 
-    /*outline: solid 1px #505050;*/
 }
 
 .track-cover {
     background-color: var(--var--background-main);
+
     width: 64px;
     height: 64px;
     border-radius: var(--var--inner-radius);
-    margin-right: 10px;
+
     box-shadow: var(--var--box-shadow);
     border: var(--var--border);
     transition: var(--var--transition-slow);
@@ -156,32 +173,39 @@ body {
 }
 
 
+.track-cover img {
+    width: 62px;
+    height: 62px;
+    border-radius: 16px;
+}
+
 .track-meta {
-    width: 150px;
+    width: 100%;
     overflow: hidden; /* Обрезка текста */
     text-overflow: ellipsis; /* Добавление многоточия */
     white-space: nowrap; /* Запрет переноса текста */
-    margin-left: 10px;
+    margin-left: 30px;
     cursor: pointer;
     user-select: text;
     display: flex;
     flex-direction: column;
     position: relative; /* Относительное позиционирование */
-    margin-right: 20px;
+
     /*outline: solid 1px #505050;*/
 }
 
 .track-title {
-    font-size: 14px;
+    font-size: 17px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     color: #cbcbcb;
-
     display: inline-block;
-
     /*outline: solid 1px #505050;*/
 }
 
+.track-title:hover{
+    color: white;
+}
 .track-artist {
     font-size: 12px;
     color: #9a9a9a;

@@ -41,7 +41,7 @@
 
             <!-- Поле поиска -->
             <div class="blur-search-container">
-              <input type="text" class="search-bar" placeholder="Search for tracks...">
+              <input type="text"  class="search-bar" placeholder="Search for tracks...">
             </div>
 
             <!--  Шаблон трека -->
@@ -49,7 +49,7 @@
 <!--            <div class="item-track" id="track1">-->
 <!--                <div class="item-cover"></div>-->
 <!--                <div class="item-info">-->
-<!--                    <div class="item-title">LIFE LIKE THIS</div>-->
+<!--                    <div class="item-title"></div>-->
 <!--                    <div class="item-artist">IVOXYGEN</div>-->
 <!--                </div>-->
 <!--            </div>-->
@@ -138,12 +138,12 @@
 <div class="player">
     <div class="track-info">
         <div class="track-cover">
-<!--      <img src="" alt="-" >-->
+            <img id="cover" src="1.png" alt="Cover Image" >
         </div>
 
         <div class="track-meta">
-            <div class="track-title">LIFE LIKE THIS</div>
-            <div class="track-artist">IVOXYGEN</div>
+            <div id="title" class="track-title"></div>
+            <div id="artist" class="track-artist"></div>
         </div>
     </div>
 
@@ -174,23 +174,17 @@
             <input type="range" class="timecode-slider" max="100" value="82" style="background-size: 82% 100%;" aria-label="Управление таймкодом">
             <span class="timecode-end">03:16</span>
         </div>
+
     </div>
+    <div class="controls-track-global">
+        <button id="repeat-btn" class="control-btn">
+            <svg height="25px" width="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 3L16.44 5.34003L8.48999 5.32001C4.91999 5.32001 1.98999 8.25003 1.98999 11.84C1.98999 13.63 2.71999 15.26 3.89999 16.44" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10.0001 21.0001L7.56006 18.66L15.5101 18.6801C19.0801 18.6801 22.0101 15.75 22.0101 12.16C22.0101 10.37 21.2801 8.74006 20.1001 7.56006" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12.25 14.67V9.33008L10.75 11.0001" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+        </button>
 
-
-
-
-
-
-        <div class="controls-track-global">
-            <button id="repeat-btn" class="control-btn">
-                <svg height="25px" width="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 3L16.44 5.34003L8.48999 5.32001C4.91999 5.32001 1.98999 8.25003 1.98999 11.84C1.98999 13.63 2.71999 15.26 3.89999 16.44" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10.0001 21.0001L7.56006 18.66L15.5101 18.6801C19.0801 18.6801 22.0101 15.75 22.0101 12.16C22.0101 10.37 21.2801 8.74006 20.1001 7.56006" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12.25 14.67V9.33008L10.75 11.0001" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-            </button>
-
-            <button id="shuffle-btn" class="control-btn">
-                <svg  height="25px" width="25px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000" stroke-width="1"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title>ONE-xicons</title><path d="M6.59,37.44H0.5a0.5,0.5,0,0,1,0-1H6.59a11.48,11.48,0,0,0,8.76-4.05L30.09,15a12.49,12.49,0,0,1,9.38-4.41l7.21-.08a0.52,0.52,0,0,1,.51.49,0.5,0.5,0,0,1-.49.51l-7.21.08a11.49,11.49,0,0,0-8.63,4.05L16.12,33A12.48,12.48,0,0,1,6.59,37.44Z"></path><path d="M41.88,18.62a0.5,0.5,0,0,1-.39-0.81l5.62-7.06a0.5,0.5,0,0,1,.78.62l-5.62,7.06A0.5,0.5,0,0,1,41.88,18.62Z"></path><path d="M47.5,11.56a0.5,0.5,0,0,1-.39-0.19L41.49,4.31a0.5,0.5,0,0,1,.78-0.62l5.62,7.06A0.5,0.5,0,0,1,47.5,11.56Z"></path><path d="M41.71,44.5a0.5,0.5,0,0,1-.39-0.81l5.62-7.06a0.5,0.5,0,0,1,.78.62L42.1,44.31A0.5,0.5,0,0,1,41.71,44.5Z"></path><path d="M47.32,37.44a0.5,0.5,0,0,1-.39-0.19l-5.62-7.06a0.5,0.5,0,0,1,.78-0.62l5.62,7.06A0.5,0.5,0,0,1,47.32,37.44Z"></path><path d="M46.5,37.44h-7a12.46,12.46,0,0,1-9.66-4.57l-14-17.11a11.46,11.46,0,0,0-8.89-4.2H1a0.5,0.5,0,0,1,0-1h6a12.46,12.46,0,0,1,9.66,4.57l14,17.11a11.46,11.46,0,0,0,8.89,4.2h7A0.5,0.5,0,0,1,46.5,37.44Z"></path><rect fill="none"></rect></g></svg>
-            </button>
-        </div>
-
+        <button id="shuffle-btn" class="control-btn">
+            <svg  height="25px" width="25px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000" stroke-width="1"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title>ONE-xicons</title><path d="M6.59,37.44H0.5a0.5,0.5,0,0,1,0-1H6.59a11.48,11.48,0,0,0,8.76-4.05L30.09,15a12.49,12.49,0,0,1,9.38-4.41l7.21-.08a0.52,0.52,0,0,1,.51.49,0.5,0.5,0,0,1-.49.51l-7.21.08a11.49,11.49,0,0,0-8.63,4.05L16.12,33A12.48,12.48,0,0,1,6.59,37.44Z"></path><path d="M41.88,18.62a0.5,0.5,0,0,1-.39-0.81l5.62-7.06a0.5,0.5,0,0,1,.78.62l-5.62,7.06A0.5,0.5,0,0,1,41.88,18.62Z"></path><path d="M47.5,11.56a0.5,0.5,0,0,1-.39-0.19L41.49,4.31a0.5,0.5,0,0,1,.78-0.62l5.62,7.06A0.5,0.5,0,0,1,47.5,11.56Z"></path><path d="M41.71,44.5a0.5,0.5,0,0,1-.39-0.81l5.62-7.06a0.5,0.5,0,0,1,.78.62L42.1,44.31A0.5,0.5,0,0,1,41.71,44.5Z"></path><path d="M47.32,37.44a0.5,0.5,0,0,1-.39-0.19l-5.62-7.06a0.5,0.5,0,0,1,.78-0.62l5.62,7.06A0.5,0.5,0,0,1,47.32,37.44Z"></path><path d="M46.5,37.44h-7a12.46,12.46,0,0,1-9.66-4.57l-14-17.11a11.46,11.46,0,0,0-8.89-4.2H1a0.5,0.5,0,0,1,0-1h6a12.46,12.46,0,0,1,9.66,4.57l14,17.11a11.46,11.46,0,0,0,8.89,4.2h7A0.5,0.5,0,0,1,46.5,37.44Z"></path><rect fill="none"></rect></g></svg>
+        </button>
+    </div>
 
 
     <div class="volume-settings">
@@ -200,6 +194,8 @@
         </div>
     </div>
 </div>
+
+
 
 </body>
 </html>

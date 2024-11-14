@@ -1,3 +1,6 @@
+let currentAudio = null;
+let currentPlayingTrack = null;
+
 document.addEventListener("DOMContentLoaded", () => {
     const defaultTabButton = document.querySelector('.all-tracks');
     const slider = document.querySelector('.timecode-slider');
@@ -7,9 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (defaultTabButton) openTab({ currentTarget: defaultTabButton }, 'all-tracks');
 
-    // Настройка прогресс-бара
     if (slider && timecodeStart && timecodeEnd) {
-        let totalDuration = 196; // Общее время трека в секундах
+        let totalDuration = 196;
 
         function formatTime(seconds) {
             const minutes = Math.floor(seconds / 60);
@@ -29,6 +31,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+function extractTitleAndArtistFromFilename(filename) {
+    const baseName = filename.replace(/\.[^/.]+$/, "");
+    const parts = baseName.split(" - ");
+    if (parts.length >= 2) {
+        const artist = parts[0].trim();
+        const title = parts.slice(1).join(" - ").trim();
+        return { artist, title };
+    }
+    return { artist: "Unknown Artist", title: baseName };
+}
+
 
 function openTab(evt, tabName) {
     let tabContents = document.getElementsByClassName("tab-content");
@@ -83,7 +97,13 @@ async function loadAudioMetadata(filePath) {
     try {
         const fileBuffer = fs.readFileSync(filePath);
         const metadata = await parseBuffer(fileBuffer, { mimeType: 'audio/mpeg', size: fileBuffer.length });
-        const { title, artist, picture } = metadata.common;
+        let { title, artist, picture } = metadata.common;
+
+        if (!title || !artist) {
+            const extracted = extractTitleAndArtistFromFilename(path.basename(filePath));
+            title = title || extracted.title;
+            artist = artist || extracted.artist;
+        }
 
         const audioItem = document.createElement('div');
         audioItem.classList.add('item-track');
@@ -92,12 +112,16 @@ async function loadAudioMetadata(filePath) {
                 ${picture ? `<img src="data:image/jpeg;base64,${Buffer.from(picture[0].data).toString('base64')}" />` : ''}
             </div>
             <div class="item-info">
-                <div class="item-title">${title || path.basename(filePath)}</div>
-                <div class="item-artist">${artist || 'Unknown Artist'}</div>
+                <div class="item-title">${title}</div>
+                <div class="item-artist">${artist}</div>
             </div>
         `;
 
-        audioItem.addEventListener('click', () => playAudio(filePath, metadata));
+        if (!picture) {
+            audioItem.querySelector('.item-cover').classList.add('default-cover');
+        }
+
+        audioItem.addEventListener('click', () => togglePlayPause(filePath, metadata, audioItem));
 
         if (audioList) {
             audioList.appendChild(audioItem);
@@ -109,25 +133,62 @@ async function loadAudioMetadata(filePath) {
     }
 }
 
-function playAudio(filePath, metadata) {
-    const audioElement = new Audio(filePath);
-    audioElement.play();
+function togglePlayPause(filePath, metadata, audioItem) {
+    if (currentAudio && currentAudio.src === new URL(filePath, 'file://').href) {
+        if (currentAudio.paused) {
+            currentAudio.play().catch(error => console.error("Ошибка при возобновлении воспроизведения:", error));
+            audioItem.classList.add('playing');
+            document.body.classList.add('playing'); // Добавляем класс к body при воспроизведении
+        } else {
+            currentAudio.pause();
+            audioItem.classList.remove('playing');
+            document.body.classList.remove('playing'); // Убираем класс при паузе
+        }
+    } else {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentPlayingTrack?.classList.remove('playing');
+            document.body.classList.remove('playing'); // Убираем класс для предыдущего трека
+        }
+        playAudio(filePath, metadata, audioItem);
+    }
+}
+
+function playAudio(filePath, metadata, audioItem) {
+    if (currentAudio) {
+        currentAudio.pause();
+    }
+
+    currentAudio = new Audio(filePath);
+    currentAudio.play().catch(error => console.error("Ошибка при воспроизведении аудио:", error));
+    currentPlayingTrack = audioItem;
+    audioItem.classList.add('playing');
 
     const titleElement = document.getElementById('title');
     const artistElement = document.getElementById('artist');
     const coverElement = document.getElementById('cover');
 
     if (titleElement && artistElement && coverElement) {
-        titleElement.textContent = metadata.common.title || 'Unknown Title';
-        artistElement.textContent = metadata.common.artist || 'Unknown Artist';
+        const { title, artist } = metadata?.common?.title && metadata?.common?.artist
+            ? { title: metadata.common.title, artist: metadata.common.artist }
+            : extractTitleAndArtistFromFilename(path.basename(filePath));
 
-        if (metadata.common.picture) {
+        titleElement.textContent = title || 'Unknown Title';
+        artistElement.textContent = artist || 'Unknown Artist';
+
+        if (metadata?.common?.picture && metadata.common.picture.length > 0) {
             const coverData = metadata.common.picture[0].data;
             coverElement.src = `data:image/jpeg;base64,${Buffer.from(coverData).toString('base64')}`;
+            coverElement.style.display = 'block';
         } else {
-            coverElement.src = '';
+            coverElement.src = path.join(__dirname, "1.png");
+            coverElement.style.display = 'block';
         }
     } else {
-        console.error("Элементы title, artist или cover не найдены");
+        console.error("Элементы title, artist или cover не найдены в плеере");
     }
+
+    currentAudio.addEventListener('ended', () => {
+        audioItem.classList.remove('playing');
+    });
 }
