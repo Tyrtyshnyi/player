@@ -11,17 +11,16 @@ require('electron-reload')(__dirname, {
 function createWindow () {
   const mainWindow = new BrowserWindow({
     resizable: true,
-    // transparent: true,  // Сделать окно прозрачным
-    // frame: false,       // Убрать стандартную рамку окна
-    // hasShadow: false,
-    // backgroundColor: '#00005000',
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false, // Отключает изоляцию контекста
+      enableRemoteModule: true // Включает удаленный доступ к модулям
     }
   });
   mainWindow.loadFile('MainWindow/MainWindow.html');
   mainWindow.setMenu(null);
   mainWindow.maximize();
+  mainWindow.webContents.openDevTools();
   mainWindow.setMinimumSize(1000, 800);
 }
 

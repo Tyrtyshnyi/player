@@ -10,7 +10,7 @@
     background: #494949; /* Цвет фона полосы прокрутки */
     border-radius: 16px; /* Скругленные углы полосы прокрутки */
 
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 100px;
 }
 
@@ -31,12 +31,9 @@
     top: 0;
     margin-left: -8px;
     margin-right: -8px;
+    margin-bottom: 25px;
     padding: 8px ;
     z-index: 1; /* Чтобы поле поиска было над другими элементами */
-
-    margin-bottom: 25px;
-
-    /*background-color: rgba(21, 21, 21, 0.14); !* Полупрозрачный фон *!*/
     backdrop-filter: blur(20px); /* Эффект размытия */
     /*outline: solid 1px #ff0000;*/
 }
@@ -48,7 +45,7 @@
     border-radius: var(--var--inner-radius);
     border:none;
     width: 100%;
-    padding: 10px 20px 10px 20px;
+    padding: 15px 20px 15px 20px;
     backdrop-filter: blur(10px); /* Эффект размытия */
     box-sizing: border-box;
     box-shadow: var(--var--box-shadow);
@@ -96,7 +93,7 @@
 }
 
 .item-track:active {
-    transform: scale(0.995);
+    transform: scale(0.997);
 
 }
 
@@ -116,6 +113,15 @@
 }
 .item-cover:hover{
     box-shadow: none;
+}
+
+/* Пример CSS для обложки аудиофайлов */
+.item-cover img {
+    /*margin:0 20px 2px 0;*/
+    width: 62px;
+    height: 62px;
+    object-fit: cover; /* Сохраняет пропорции изображения, обрезая по краям, если нужно */
+    border-radius: var(--var--inner-radius);
 }
 
 /* Информация о треке */

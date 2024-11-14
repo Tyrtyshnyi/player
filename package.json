@@ -9,5 +9,8 @@
   "devDependencies": {
     "electron": "^33.0.1",
     "electron-reload": "^2.0.0-alpha.1"
+  },
+  "dependencies": {
+    "music-metadata-browser": "^2.5.11"
   }
 }

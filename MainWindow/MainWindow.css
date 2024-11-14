@@ -34,6 +34,7 @@ body {
 
 
 .left-panel{
+    outline: none;
     bottom: 0;
     user-select: none;
     height: 100%;

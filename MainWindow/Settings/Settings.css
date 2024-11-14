@@ -17,7 +17,7 @@
     border-radius: 20px;
     padding: 20px;
     box-shadow: var(--var--box-shadow);
-    transition: var(--var--transition-medium);
+    transition: var(--var--transition-fast);
 }
 
 /* Заголовок секции */
@@ -30,23 +30,24 @@
 
 /* Элементы внутри каждой секции */
 .settings-item {
+    /*width: 20%;*/
     background-color: var(--var--background-3);
     border-radius: 15px;
     padding: 15px;
     margin-bottom: 15px;
     box-shadow: var(--var-box-shadow-buttons);
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: var(--var--transition-fast);
 }
 
 /* Эффект при наведении на элемент */
 .settings-item:hover {
     transform: scale(1.006);
     background-color: var(--var--background-4);
+    transition: var(--var--transition-fast);
 }
 
 .dropdown{
-
     color: white;
     padding: 5px;
     border: var(--var--border);
@@ -56,9 +57,23 @@
     outline: none;
     /*outline: solid red;*/
 }
-.settings-theme{
-    background-color: var(--var--background-1);
+
+.dropdown option {
+    cursor: pointer;
+    background-color: var(--var--background-4);
+    color: #000000;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
-.settings-theme:hover {
-    background-color: var(--var--background-2);
+
+
+.settings-theme-container{
+    display: flex;
+    justify-content:left;
+}
+.settings-theme{
+    margin-left: 2%;
+    width: 10%;
+    cursor:pointer;
+    background-color: var(--var--background-1);
+    /*outline: solid red;*/
 }

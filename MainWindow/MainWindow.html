@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="./AllTracks/AllTracks.css">
     <link rel="stylesheet" href="variables.css">
     <link rel="stylesheet" href="./Settings/Settings.css">
+    <link rel="stylesheet" href="./Search/Search.css">
 
     <!--JavaScript-->
     <script src="MainWindow.js"></script>
     <script src="./AllTracks/AllTracks.js"></script>
     <script src="./Settings/Settings.js"></script>
+    <script src="./Search/Search.js"></script>
 </head>
 <body>
 
@@ -34,8 +36,6 @@
 
     <div id="all-tracks" class="tab-content">
 
-
-
         <!-- Список треков -->
         <div class="track-list">
 
@@ -44,14 +44,17 @@
               <input type="text" class="search-bar" placeholder="Search for tracks...">
             </div>
 
-            <!--  Шаблоны треков -->
-            <div class="item-track" id="track1">
-                <div class="item-cover"></div>
-                <div class="item-info">
-                    <div class="item-title">LIFE LIKE THIS</div>
-                    <div class="item-artist">IVOXYGEN</div>
-                </div>
-            </div>
+            <!--  Шаблон трека -->
+
+<!--            <div class="item-track" id="track1">-->
+<!--                <div class="item-cover"></div>-->
+<!--                <div class="item-info">-->
+<!--                    <div class="item-title">LIFE LIKE THIS</div>-->
+<!--                    <div class="item-artist">IVOXYGEN</div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            -->
+
 
         </div>
     </div>
@@ -67,7 +70,9 @@
     </div>
 
     <div id="search" class="tab-content">
-
+        <div class="search-container">
+            <input type="text" class="search-bar tab-search-bar" placeholder="Search...">
+        </div>
     </div>
 
     <div id="settings" class="tab-content">
@@ -84,10 +89,15 @@
                     </select>
                 </div>
 
-                <div class="settings-item settings-theme">
-                    <label>
-                        Тёмная тема
-                    </label>
+                <div class="settings-item settings-theme-container">
+                    <label>Тема:</label>
+                    <div class="settings-theme"></div>
+                </div>
+
+                <div class="settings-item">
+                    <div class="CSS-on/off">
+                        Отключить всю стилизацию
+                    </div>
                 </div>
             </div>
 
@@ -103,7 +113,7 @@
 
                 <div class="settings-item">
                     Открывать при запуске:
-                    <select id="openTabSelect" class="dropdown dropdown-settings" onchange="openTabSelect(this.value)">
+                    <select id="openTabSelect" class="dropdown dropdown-settings" onchange="selectOpenTab(this.value)">
                         <option value="1">Home</option>
                         <option value="2">All Tracks</option>
                         <option value="3">Playlists</option>
@@ -111,8 +121,10 @@
                         <option value="5">Search</option>
                     </select>
                 </div>
-                <div class="settings-item"></div>
-                <div class="settings-item"></div>
+
+<!--                <div class="settings-item"></div>-->
+
+
             </div>
         </div>
     </div>
