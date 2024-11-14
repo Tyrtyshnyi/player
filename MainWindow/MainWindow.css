@@ -12,31 +12,6 @@
     font-size: 14px;
 }
 
-:root{
-    --var--outer-radius: 24px;
-    --var--inner-radius: 16px;
-
-    --var--padding:8px;
-
-    --var--box-shadow: 0 5px 10px rgba(0, 0, 0, 0.48);
-    --var-box-shadow-buttons: 0 2px 10px rgba(0, 0, 0, 0.32);
-
-    --var--border: 1px solid #505050;
-
-
-    --var--background-main: #202020;
-    --var--background-1: #252525;
-    --var--background-2: #2f2f2f;
-    --var--background-3: #505050;
-    --var--background-accent-1: linear-gradient(to top left, #f95666, #4e60f7);
-
-
-    --var--transition-slow: 0.5s ease-in-out;
-    --var--transition-medium: 0.3s ease-in-out;
-    --var--transition-fast: 0.1s ease-in-out;
-}
-
-
 html, body {
     height: 99%; /* Задаем высоту 100% для html и body */
     margin: 0;    /* Убираем отступы */
@@ -56,8 +31,10 @@ body {
 }
 
 
-.left-panel{
 
+
+.left-panel{
+    bottom: 0;
     user-select: none;
     height: 100%;
     width: 200px;
@@ -71,7 +48,7 @@ body {
     box-sizing: border-box; /* Учитываем отступы и границы в общей высоте */
     display: flex;          /* Используем flexbox */
     flex-direction: column; /* Располагаем элементы по вертикали */
-    justify-content: flex-start; /* Выравниваем элементы сверху */
+    justify-content: normal; /* Выравниваем элементы сверху */
     transition: var(--var--transition-slow);
     /*outline: 1px solid red;*/
 }
@@ -85,6 +62,7 @@ body {
 
 
 .left-panel-button{
+    height: 40px;
     cursor: pointer;
     color: white;
     border: var(--var--border);
@@ -104,10 +82,16 @@ body {
     transition: var(--var--transition-fast);
 }
 
+.left-panel-button:active{
+    transition: var(--var--transition-fast);
+    transform: scale(0.95);
+}
 
 .home-button{
     background-image:var(--var--background-accent-1);
     margin-bottom: 50px;
+    box-shadow: var(--var--box-shadow);
+    transition: var(--var--transition-fast);
     /*width: 75%;*/
 }
 
@@ -130,6 +114,7 @@ body {
     border: var(--var--border);
     height: 80px;
     background: var(--var--background-1);
+    /*background-image:var(--var--background-accent-1);*/
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -185,25 +170,21 @@ body {
     /*outline: solid 1px #505050;*/
 }
 
-.track-meta:hover .scrolling-text {
-    animation: scrollText 10s linear infinite; /* Анимация запускается при наведении мыши */
-}
-
 .track-title {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 10px;
+    color: #cbcbcb;
 
     display: inline-block;
-    white-space: nowrap; /* Отключаем перенос текста */
-    will-change: transform; /* Оптимизация для анимации */
-    animation: none; /* По умолчанию анимация выключена */
+
     /*outline: solid 1px #505050;*/
 }
 
 .track-artist {
     font-size: 12px;
     color: #9a9a9a;
+    /*outline: solid 1px #505050*/
 }
 
 
@@ -350,22 +331,24 @@ body {
     left: 220px; /* Отодвигаем на ширину левой панели */
     right: 10px; /* Отступ справа */
     bottom: 100px; /* Отступ сверху над плеером */
+    padding: 0 8px 0 8px;
+
     background: var(--var--background-1);
     border-radius: var(--var--outer-radius);
-    /*padding: var(--var--padding);*/
-    padding: 10px;
-    overflow: auto; /* Добавляем прокрутку, если контент не помещается */
     border: var(--var--border);
-
+    box-shadow: var(--var--box-shadow);
+    overflow: auto; /* Добавляем прокрутку, если контент не помещается */
+    transition: var(--var--transition-slow);
     /*outline:1px solid red;*/
 }
 
 .main-content:hover{
-
+    box-shadow: none;
 }
 
 /* Вкладки по умолчанию скрыты */
 .tab-content {
+    /*outline:1px solid red;*/
     display: none;
 }
 

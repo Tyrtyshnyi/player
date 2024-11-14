@@ -4,111 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music</title>
-    <link rel="stylesheet" href="MainWindow.css"> <!-- Используем относительный путь -->
-    <script src="MainWindow.js"></script> <!-- Подключение JavaScript -->
+    <link rel="stylesheet" href="MainWindow.css">
+    <link rel="stylesheet" href="./AllTracks/AllTracks.css">
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="./Settings/Settings.css">
+
+    <!--JavaScript-->
+    <script src="MainWindow.js"></script>
+    <script src="./AllTracks/AllTracks.js"></script>
+    <script src="./Settings/Settings.js"></script>
 </head>
 <body>
 
 <div class="left-panel">
     <button class="left-panel-button home-button" onclick="openTab(event, 'home')">Home</button>
-    <button class="left-panel-button" onclick="openTab(event, 'all-tracks')">All Tracks</button>
+    <button class="left-panel-button all-tracks" onclick="openTab(event, 'all-tracks')">All Tracks</button>
     <button class="left-panel-button" onclick="openTab(event, 'playlists')">Playlists</button>
     <button class="left-panel-button" onclick="openTab(event, 'favorite')">Favorite</button>
+    <button class="left-panel-button" onclick="openTab(event, 'search')">Search</button>
+    <button class="left-panel-button" onclick="openTab(event, 'settings')">Settings</button>
 </div>
-
-
 
 
 <!-- Контейнер для основного контента -->
 <div class="main-content">
     <div id="home" class="tab-content active">
-        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>
-        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>
-        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>
-        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>
-        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>
-        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>
-        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>        <h2>Home Content</h2>
-        <p>Здесь будет отображаться информация главной вкладки.</p>
+        fffffffffff
     </div>
 
     <div id="all-tracks" class="tab-content">
-        <h2>All Tracks Content</h2>
-        <p>Список всех треков будет здесь.</p>
+
+
+
+        <!-- Список треков -->
+        <div class="track-list">
+
+            <!-- Поле поиска -->
+            <div class="blur-search-container">
+              <input type="text" class="search-bar" placeholder="Search for tracks...">
+            </div>
+
+            <!--  Шаблоны треков -->
+            <div class="item-track" id="track1">
+                <div class="item-cover"></div>
+                <div class="item-info">
+                    <div class="item-title">LIFE LIKE THIS</div>
+                    <div class="item-artist">IVOXYGEN</div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <div id="playlists" class="tab-content">
@@ -119,6 +64,57 @@
     <div id="favorite" class="tab-content">
         <h2>Favorite Content</h2>
         <p>Ваши любимые треки появятся здесь.</p>
+    </div>
+
+    <div id="search" class="tab-content">
+
+    </div>
+
+    <div id="settings" class="tab-content">
+        <div class="settings-container">
+
+
+            <div class="settings-section">
+                <h3>Frontend</h3>
+                <div class="settings-item">
+                    Скруглить края
+                    <select class="dropdown">
+                        <option value="Yes">Yes</option>
+                        <option value="Yes">No</option>
+                    </select>
+                </div>
+
+                <div class="settings-item settings-theme">
+                    <label>
+                        Тёмная тема
+                    </label>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="settings-section">
+                <h3>Backend</h3>
+                <div class="settings-item">
+                    Поиск по папкам:
+                </div>
+
+                <div class="settings-item">
+                    Открывать при запуске:
+                    <select id="openTabSelect" class="dropdown dropdown-settings" onchange="openTabSelect(this.value)">
+                        <option value="1">Home</option>
+                        <option value="2">All Tracks</option>
+                        <option value="3">Playlists</option>
+                        <option value="4">Favorite</option>
+                        <option value="5">Search</option>
+                    </select>
+                </div>
+                <div class="settings-item"></div>
+                <div class="settings-item"></div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -134,7 +130,7 @@
         </div>
 
         <div class="track-meta">
-            <div class="track-title">LIFE LIKE THIS  </div>
+            <div class="track-title">LIFE LIKE THIS</div>
             <div class="track-artist">IVOXYGEN</div>
         </div>
     </div>
@@ -144,11 +140,11 @@
     <div class="main-controls">
         <div class="controls-track-local">
             <button id="prev-btn" class="control-btn">
-                <svg fill="#000000" height="25px" width="30px" viewBox="0 0 32 32" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink" transform="rotate(180)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Icon"> <path d="M22.554,13.503c-3.552,-2.365 -10.056,-6.696 -13.914,-9.265c-0.921,-0.613 -2.104,-0.67 -3.079,-0.148c-0.975,0.522 -1.584,1.539 -1.584,2.645l0,18.53c0,1.106 0.609,2.123 1.584,2.645c0.975,0.522 2.158,0.465 3.079,-0.148c3.858,-2.569 10.362,-6.9 13.914,-9.265c0.836,-0.556 1.338,-1.493 1.338,-2.497c-0,-1.004 -0.502,-1.941 -1.338,-2.497l0,-0Zm-15.022,-7.601l13.914,9.266c0.278,0.185 0.446,0.497 0.446,0.832c-0,0.335 -0.168,0.647 -0.446,0.832l-13.914,9.266c-0.307,0.204 -0.702,0.223 -1.027,0.049c-0.325,-0.174 -0.528,-0.513 -0.528,-0.882c0,0 0,-18.53 0,-18.53c0,-0.369 0.203,-0.708 0.528,-0.882c0.325,-0.174 0.72,-0.155 1.027,0.049Z"></path> <path d="M26.003,4.987l-0.003,22c-0,0.552 0.448,1.001 1,1.001c0.552,-0 1,-0.448 1,-1l0.003,-22c-0,-0.552 -0.448,-1 -1,-1c-0.552,-0 -1,0.448 -1,0.999Z"></path> </g> </g></svg>
+                <svg fill="#000000" height="25px" width="30px" viewBox="0 0 32 32" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink" transform="rotate(180)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Icon"> <path d="M22.554,13.503c-3.552,-2.365 -10.056,-6.696 -13.914,-9.265c-0.921,-0.613 -2.104,-0.67 -3.079,-0.148c-0.975,0.522 -1.584,1.539 -1.584,2.645l0,18.53c0,1.106 0.609,2.123 1.584,2.645c0.975,0.522 2.158,0.465 3.079,-0.148c3.858,-2.569 10.362,-6.9 13.914,-9.265c0.836,-0.556 1.338,-1.493 1.338,-2.497c-0,-1.004 -0.502,-1.941 -1.338,-2.497l0,-0Zm-15.022,-7.601l13.914,9.266c0.278,0.185 0.446,0.497 0.446,0.832c-0,0.335 -0.168,0.647 -0.446,0.832l-13.914,9.266c-0.307,0.204 -0.702,0.223 -1.027,0.049c-0.325,-0.174 -0.528,-0.513 -0.528,-0.882c0,0 0,-18.53 0,-18.53c0,-0.369 0.203,-0.708 0.528,-0.882c0.325,-0.174 0.72,-0.155 1.027,0.049Z"></path> <path d="M26.003,4.987l-0.003,22c-0,0.552 0.448,1.001 1,1.001c0.552,-0 1,-0.448 1,-1l0.003,-22c-0,-0.552 -0.448,-1 -1,-1c-0.552,-0 -1,0.448 -1,0.999Z"></path> </g> </g></svg>
             </button>
 
             <button id="play-btn" class="control-btn play-btn">
-                <svg height="30px" width="30px" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 5.49683V18.5032C4 20.05 5.68077 21.0113 7.01404 20.227L18.0694 13.7239C19.384 12.9506 19.384 11.0494 18.0694 10.2761L7.01404 3.77296C5.68077 2.98869 4 3.95 4 5.49683Z" stroke="#ff9ca8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                <svg height="30px" width="30px" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 5.49683V18.5032C4 20.05 5.68077 21.0113 7.01404 20.227L18.0694 13.7239C19.384 12.9506 19.384 11.0494 18.0694 10.2761L7.01404 3.77296C5.68077 2.98869 4 3.95 4 5.49683Z" stroke="#00dcff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
             </button>
 
             <button  id="pause-btn" class="control-btn pause-btn">
@@ -156,7 +152,7 @@
             </button>
 
             <button id="next-btn" class="control-btn">
-                <svg fill="#000000" height="25px" width="30px" viewBox="0 0 32 32" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Icon"> <path d="M22.554,13.503c-3.552,-2.365 -10.056,-6.696 -13.914,-9.265c-0.921,-0.613 -2.104,-0.67 -3.079,-0.148c-0.975,0.522 -1.584,1.539 -1.584,2.645l0,18.53c0,1.106 0.609,2.123 1.584,2.645c0.975,0.522 2.158,0.465 3.079,-0.148c3.858,-2.569 10.362,-6.9 13.914,-9.265c0.836,-0.556 1.338,-1.493 1.338,-2.497c-0,-1.004 -0.502,-1.941 -1.338,-2.497l0,-0Zm-15.022,-7.601l13.914,9.266c0.278,0.185 0.446,0.497 0.446,0.832c-0,0.335 -0.168,0.647 -0.446,0.832l-13.914,9.266c-0.307,0.204 -0.702,0.223 -1.027,0.049c-0.325,-0.174 -0.528,-0.513 -0.528,-0.882c0,0 0,-18.53 0,-18.53c0,-0.369 0.203,-0.708 0.528,-0.882c0.325,-0.174 0.72,-0.155 1.027,0.049Z"></path> <path d="M26.003,4.987l-0.003,22c-0,0.552 0.448,1.001 1,1.001c0.552,-0 1,-0.448 1,-1l0.003,-22c-0,-0.552 -0.448,-1 -1,-1c-0.552,-0 -1,0.448 -1,0.999Z"></path> </g> </g></svg>
+                <svg fill="#000000" height="25px" width="30px" viewBox="0 0 32 32" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Icon"> <path d="M22.554,13.503c-3.552,-2.365 -10.056,-6.696 -13.914,-9.265c-0.921,-0.613 -2.104,-0.67 -3.079,-0.148c-0.975,0.522 -1.584,1.539 -1.584,2.645l0,18.53c0,1.106 0.609,2.123 1.584,2.645c0.975,0.522 2.158,0.465 3.079,-0.148c3.858,-2.569 10.362,-6.9 13.914,-9.265c0.836,-0.556 1.338,-1.493 1.338,-2.497c-0,-1.004 -0.502,-1.941 -1.338,-2.497l0,-0Zm-15.022,-7.601l13.914,9.266c0.278,0.185 0.446,0.497 0.446,0.832c-0,0.335 -0.168,0.647 -0.446,0.832l-13.914,9.266c-0.307,0.204 -0.702,0.223 -1.027,0.049c-0.325,-0.174 -0.528,-0.513 -0.528,-0.882c0,0 0,-18.53 0,-18.53c0,-0.369 0.203,-0.708 0.528,-0.882c0.325,-0.174 0.72,-0.155 1.027,0.049Z"></path> <path d="M26.003,4.987l-0.003,22c-0,0.552 0.448,1.001 1,1.001c0.552,-0 1,-0.448 1,-1l0.003,-22c-0,-0.552 -0.448,-1 -1,-1c-0.552,-0 -1,0.448 -1,0.999Z"></path> </g> </g></svg>
             </button>
         </div>
 
@@ -175,11 +171,11 @@
 
         <div class="controls-track-global">
             <button id="repeat-btn" class="control-btn">
-                <svg height="30px" width="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 3L16.44 5.34003L8.48999 5.32001C4.91999 5.32001 1.98999 8.25003 1.98999 11.84C1.98999 13.63 2.71999 15.26 3.89999 16.44" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10.0001 21.0001L7.56006 18.66L15.5101 18.6801C19.0801 18.6801 22.0101 15.75 22.0101 12.16C22.0101 10.37 21.2801 8.74006 20.1001 7.56006" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12.25 14.67V9.33008L10.75 11.0001" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                <svg height="25px" width="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 3L16.44 5.34003L8.48999 5.32001C4.91999 5.32001 1.98999 8.25003 1.98999 11.84C1.98999 13.63 2.71999 15.26 3.89999 16.44" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10.0001 21.0001L7.56006 18.66L15.5101 18.6801C19.0801 18.6801 22.0101 15.75 22.0101 12.16C22.0101 10.37 21.2801 8.74006 20.1001 7.56006" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12.25 14.67V9.33008L10.75 11.0001" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
             </button>
 
             <button id="shuffle-btn" class="control-btn">
-                <svg  height="30px" width="30px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000" stroke-width="1"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title>ONE-xicons</title><path d="M6.59,37.44H0.5a0.5,0.5,0,0,1,0-1H6.59a11.48,11.48,0,0,0,8.76-4.05L30.09,15a12.49,12.49,0,0,1,9.38-4.41l7.21-.08a0.52,0.52,0,0,1,.51.49,0.5,0.5,0,0,1-.49.51l-7.21.08a11.49,11.49,0,0,0-8.63,4.05L16.12,33A12.48,12.48,0,0,1,6.59,37.44Z"></path><path d="M41.88,18.62a0.5,0.5,0,0,1-.39-0.81l5.62-7.06a0.5,0.5,0,0,1,.78.62l-5.62,7.06A0.5,0.5,0,0,1,41.88,18.62Z"></path><path d="M47.5,11.56a0.5,0.5,0,0,1-.39-0.19L41.49,4.31a0.5,0.5,0,0,1,.78-0.62l5.62,7.06A0.5,0.5,0,0,1,47.5,11.56Z"></path><path d="M41.71,44.5a0.5,0.5,0,0,1-.39-0.81l5.62-7.06a0.5,0.5,0,0,1,.78.62L42.1,44.31A0.5,0.5,0,0,1,41.71,44.5Z"></path><path d="M47.32,37.44a0.5,0.5,0,0,1-.39-0.19l-5.62-7.06a0.5,0.5,0,0,1,.78-0.62l5.62,7.06A0.5,0.5,0,0,1,47.32,37.44Z"></path><path d="M46.5,37.44h-7a12.46,12.46,0,0,1-9.66-4.57l-14-17.11a11.46,11.46,0,0,0-8.89-4.2H1a0.5,0.5,0,0,1,0-1h6a12.46,12.46,0,0,1,9.66,4.57l14,17.11a11.46,11.46,0,0,0,8.89,4.2h7A0.5,0.5,0,0,1,46.5,37.44Z"></path><rect fill="none"></rect></g></svg>
+                <svg  height="25px" width="25px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000" stroke-width="1"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title>ONE-xicons</title><path d="M6.59,37.44H0.5a0.5,0.5,0,0,1,0-1H6.59a11.48,11.48,0,0,0,8.76-4.05L30.09,15a12.49,12.49,0,0,1,9.38-4.41l7.21-.08a0.52,0.52,0,0,1,.51.49,0.5,0.5,0,0,1-.49.51l-7.21.08a11.49,11.49,0,0,0-8.63,4.05L16.12,33A12.48,12.48,0,0,1,6.59,37.44Z"></path><path d="M41.88,18.62a0.5,0.5,0,0,1-.39-0.81l5.62-7.06a0.5,0.5,0,0,1,.78.62l-5.62,7.06A0.5,0.5,0,0,1,41.88,18.62Z"></path><path d="M47.5,11.56a0.5,0.5,0,0,1-.39-0.19L41.49,4.31a0.5,0.5,0,0,1,.78-0.62l5.62,7.06A0.5,0.5,0,0,1,47.5,11.56Z"></path><path d="M41.71,44.5a0.5,0.5,0,0,1-.39-0.81l5.62-7.06a0.5,0.5,0,0,1,.78.62L42.1,44.31A0.5,0.5,0,0,1,41.71,44.5Z"></path><path d="M47.32,37.44a0.5,0.5,0,0,1-.39-0.19l-5.62-7.06a0.5,0.5,0,0,1,.78-0.62l5.62,7.06A0.5,0.5,0,0,1,47.32,37.44Z"></path><path d="M46.5,37.44h-7a12.46,12.46,0,0,1-9.66-4.57l-14-17.11a11.46,11.46,0,0,0-8.89-4.2H1a0.5,0.5,0,0,1,0-1h6a12.46,12.46,0,0,1,9.66,4.57l14,17.11a11.46,11.46,0,0,0,8.89,4.2h7A0.5,0.5,0,0,1,46.5,37.44Z"></path><rect fill="none"></rect></g></svg>
             </button>
         </div>
 

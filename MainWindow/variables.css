@@ -1,0 +1,27 @@
+:root{
+    --var--outer-radius: 24px;
+    --var--inner-radius: 16px;
+
+    --var--padding:8px;
+
+    --var--box-shadow: 0 5px 10px rgba(0, 0, 0, 0.48);
+    --var-box-shadow-buttons: 0 2px 10px rgba(0, 0, 0, 0.32);
+
+    --var--border: 1px solid #505050;
+
+
+    --var--background-main: #202020;
+    --var--background-1: #282828;
+    --var--background-2: #343434;
+    --var--background-3: #3f3f3f;
+    --var--background-4: #505050;
+
+
+    --var--background-accent-1: linear-gradient(to top left, #f95666, #4e60f7);
+    --var--background-accent-2: linear-gradient(to top left, #56f9eb, #4e60f7);
+    --var--background-accent-3: linear-gradient(to right, #3a3a3a, #575757);
+
+    --var--transition-slow: 0.5s ease-in-out;
+    --var--transition-medium: 0.3s ease-in-out;
+    --var--transition-fast: 0.1s ease-in-out;
+}

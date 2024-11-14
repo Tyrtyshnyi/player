@@ -1,0 +1,130 @@
+::-webkit-scrollbar {
+    width: 1px; /* Ширина полосы прокрутки */
+}
+
+/*::-webkit-scrollbar:hover{*/
+/*    width: 20px;*/
+/*}*/
+
+::-webkit-scrollbar-track {
+    background: #494949; /* Цвет фона полосы прокрутки */
+    border-radius: 16px; /* Скругленные углы полосы прокрутки */
+
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #cecece; /* Цвет полосы прокрутки */
+    border-radius: 16px; /* Скругленные углы полосы прокрутки */
+
+}
+
+
+
+
+
+
+.blur-search-container{
+    position: sticky;
+    top: 0;
+    margin-left: -8px;
+    margin-right: -8px;
+    padding: 8px ;
+    z-index: 1; /* Чтобы поле поиска было над другими элементами */
+
+    margin-bottom: 25px;
+
+    /*background-color: rgba(21, 21, 21, 0.14); !* Полупрозрачный фон *!*/
+    backdrop-filter: blur(20px); /* Эффект размытия */
+    /*outline: solid 1px #ff0000;*/
+}
+
+.search-bar {
+    height: 40px;
+
+    background-color: var(--var--background-3);
+    border-radius: var(--var--inner-radius);
+    border:none;
+    width: 100%;
+    padding: 10px 20px 10px 20px;
+    backdrop-filter: blur(10px); /* Эффект размытия */
+    box-sizing: border-box;
+    box-shadow: var(--var--box-shadow);
+    color: white;
+    outline: none;
+    transition: var(--var--transition-slow);
+
+    /*outline: solid 1px #505050;*/
+}
+
+.search-bar::placeholder{
+    color: #565656;
+}
+
+.search-bar:focus{
+    background-color: var(--var--background-2);
+    box-shadow: none;
+    transition: var(--var--transition-slow);
+}
+
+
+/* Список треков */
+.track-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /*outline: solid 1px #505050;*/
+
+}
+
+/* Элемент трека */
+.item-track {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: var(--var--outer-radius);
+    padding: 8px;
+    width: 100%;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.5s ease;
+}
+
+.item-track:hover {
+    box-shadow: var(--var--box-shadow);
+    background-color: var(--var--background-2);
+}
+
+.item-track:active {
+    transform: scale(0.995);
+
+}
+
+
+
+ /*Обложка трек */
+.item-cover {
+    background-color: var(--var--background-main);
+    width: 64px;
+    height: 64px;
+    border-radius: var(--var--inner-radius);
+    margin-right: 20px;
+    box-shadow: var(--var--box-shadow);
+    border: var(--var--border);
+    transition: var(--var--transition-slow);
+    /*outline: solid 1px #505050;*/
+}
+.item-cover:hover{
+    box-shadow: none;
+}
+
+/* Информация о треке */
+.item-info {
+    flex-grow: 1;
+}
+
+.track-title {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}

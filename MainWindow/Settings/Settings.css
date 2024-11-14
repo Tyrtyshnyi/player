@@ -1,0 +1,64 @@
+/* Основной контейнер для настроек */
+.settings-container {
+    user-select: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 20px;
+    /*transition: var(--var--transition-fast);*/
+    /*outline: solid 1px #ff0000;*/
+}
+
+/* Секция для каждой категории (Интерфейс и Бэкенд) */
+.settings-section {
+    width:48%;
+    background-color: var(--var--background-2);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--var--box-shadow);
+    transition: var(--var--transition-medium);
+}
+
+/* Заголовок секции */
+.settings-section h3 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+
+/* Элементы внутри каждой секции */
+.settings-item {
+    background-color: var(--var--background-3);
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: var(--var-box-shadow-buttons);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+/* Эффект при наведении на элемент */
+.settings-item:hover {
+    transform: scale(1.006);
+    background-color: var(--var--background-4);
+}
+
+.dropdown{
+
+    color: white;
+    padding: 5px;
+    border: var(--var--border);
+    box-shadow: var(--var-box-shadow-buttons);
+    border-radius: var(--var--inner-radius);
+    background-color: var(--var--background-2);
+    outline: none;
+    /*outline: solid red;*/
+}
+.settings-theme{
+    background-color: var(--var--background-1);
+}
+.settings-theme:hover {
+    background-color: var(--var--background-2);
+}

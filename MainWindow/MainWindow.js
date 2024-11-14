@@ -33,11 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-
-
-
+// Устанавливаем вкладку по умолчанию при загрузке страницы
+document.addEventListener("DOMContentLoaded", function() {
+    // Устанавливаем вкладку по умолчанию
+    const defaultTabButton = document.querySelector('.settings'); // Замените 'home-button' на нужную кнопку
+    openTab({ currentTarget: defaultTabButton }, 'settings');
+});
 
 function openTab(evt, tabName) {
     // Получаем все элементы с классом 'tab-content' и скрываем их
@@ -55,4 +56,5 @@ function openTab(evt, tabName) {
     // Показываем текущую вкладку и добавляем класс 'active' к кнопке
     document.getElementById(tabName).classList.add("active");
     evt.currentTarget.classList.add("active");
+
 }
