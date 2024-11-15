@@ -1,0 +1,246 @@
+/* Плеер */
+.player {
+    user-select: none;
+    position: absolute; /* Плеер теперь размещен с помощью absolute */
+    bottom: 0;
+    margin: 10px;
+    left: 210px; /* Сдвигаем плеер на ширину левой панели */
+    width: calc(100% - 230px); /* Задаем ширину оставшегося пространства */
+
+    border: var(--var--border);
+    height: 80px;
+    background: var(--var--background-1);
+    /*background-image:var(--var--background-accent-1);*/
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    border-radius: var(--var--outer-radius);
+    box-shadow: var(--var--box-shadow);
+    box-sizing: border-box;
+
+    transition: var(--var--transition-slow);
+    /*outline: solid 1px #505050;*/
+}
+
+.player:hover{
+    background-color: var(--var--background-2);
+    box-shadow: none;
+
+}
+
+
+
+.track-info {
+    display: flex;
+    align-items: center;
+    width: 20%;
+
+}
+
+.track-cover {
+    background-color: var(--var--background-main);
+
+    width: 64px;
+    height: 64px;
+    border-radius: var(--var--inner-radius);
+    /*margin-left: 8px;*/
+    box-shadow: var(--var--box-shadow);
+    border: var(--var--border);
+    transition: var(--var--transition-slow);
+    /*outline: solid 1px #505050;*/
+}
+.track-cover:hover{
+    transform: scale(1.15);
+
+}
+
+
+.track-cover img {
+    width: 62px;
+    height: 62px;
+    border-radius: 16px;
+}
+
+
+@keyframes metaGradient {
+    to {
+        background-position: -200% ;
+    }
+}
+
+.track-meta {
+
+    overflow: hidden; /* Обрезка текста */
+    text-overflow: ellipsis; /* Добавление многоточия */
+    white-space: nowrap; /* Запрет переноса текста */
+
+    background-image: var(--var--background-accent-3);
+    background-size: 200%; /* Длина фона для плавного перехода */
+    background-position: 0 center;
+    -webkit-background-clip: text; /* Наложение фона только на текст */
+    -webkit-text-fill-color: transparent;
+    animation: metaGradient 10s linear infinite; /* Запускаем анимацию */
+
+    width: 100%;
+    margin-left: 30px;
+    cursor: pointer;
+    user-select: text;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.track-title {
+
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    /*color: #cbcbcb;*/
+    display: inline-block;
+    /*outline: solid 1px #505050;*/
+}
+
+
+.track-title:hover{
+    color: white;
+}
+.track-artist {
+    font-size: 12px;
+    color: #9a9a9a;
+    /*outline: solid 1px #505050*/
+}
+
+
+
+
+.main-controls {
+    height: 80px; /* Высота может быть адаптивной */
+    width: 50%;
+    margin: 0 auto; /* Центрируем основной блок относительно родителя */
+    display: flex;
+    flex-direction: column; /* Элементы внутри будут расположены вертикально */
+    align-items: center; /* Центрируем содержимое по горизонтали */
+    /*outline: solid 1px #505050*/
+}
+
+
+.controls-track-local {
+    display: flex; /* Используем flex для кнопок управления */
+    justify-content: center; /* Центрируем кнопки внутри блока */
+    /*gap: 5px; !* Отступы между кнопками *!*/
+    width: 100%; /* Занимает всю ширину родительского контейнера */
+    margin: 15px 0 10px 0;
+}
+
+.controls-track-global{
+    margin-right: 5%;
+
+}
+
+.control-btn {
+    background: transparent;
+    border: none;
+    /*font-size: 24px;*/
+    cursor: pointer;
+    margin:0 10px 0 10px;
+    /*outline: solid 1px #505050;*/
+}
+
+.play-btn{
+
+}
+
+.pause-btn{
+    display: none;
+}
+
+
+
+.timecode-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.timecode-start,
+.timecode-end {
+    font-size: 14px;
+    color: #d3d3d3;
+}
+
+.timecode-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+
+}
+
+/* Стили для трека ползунка */
+.timecode-slider::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 10px;
+    background: #707070; /* Базовый цвет трека */
+}
+
+/* Стили для ползунка (thumb) */
+.timecode-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 10px;
+    background-color: #6e6e6e;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -2px; /* Центрирование ползунка */
+}
+
+
+
+
+/* Контейнер настроек громкости */
+.volume-settings {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Расстояние между иконкой и ползунком */
+}
+
+
+/* Контейнер для полосы громкости */
+.volume-bar {
+    position: relative;
+    height: 7px; /* Высота линии громкости */
+    width: 100px; /* Ширина громкости */
+    background-color: #707070; /* Цвет фона (незаполненная часть) */
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Заполненная часть полосы громкости */
+.volume-level {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%; /* Заполненная часть должна быть такой же высоты, как и основной трек */
+    width: 50%; /* Начальная громкость - 50% */
+    background-color: lightgrey; /* Цвет заполненной части */
+    border-radius: 10px;
+}
+
+/* Бегунок громкости */
+.volume-level::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    height: 12px;
+    width: 12px;
+    background-color: black; /* Цвет бегунка */
+    border-radius: 50%;
+    cursor: pointer;
+}

@@ -1,17 +1,18 @@
 ::-webkit-scrollbar {
-    width: 1px; /* Ширина полосы прокрутки */
+    width: 2px; /* Ширина полосы прокрутки */
+    cursor: pointer;
 }
 
-/*::-webkit-scrollbar:hover{*/
-/*    width: 20px;*/
-/*}*/
+::-webkit-scrollbar:hover{
+    width: 50px;
+}
 
 ::-webkit-scrollbar-track {
     background: #494949; /* Цвет фона полосы прокрутки */
     border-radius: 16px; /* Скругленные углы полосы прокрутки */
 
     margin-top: 50px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 
@@ -22,23 +23,7 @@
 }
 
 
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 50%;
-    }
-    25% {
-        background-position: 50% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    75% {
-        background-position: 50% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+
 
 
 .blur-search-container{
@@ -114,12 +99,25 @@
 
 }
 
+@keyframes gradientShift {
+    to {
+        background-position: -200% ;
+    }
+}
+
 .item-track.playing {
-    background: var(--var-item-track-playng);
-    background-size: 400% 400%;
+    background: var(--var--background-accent-4);
+    background-size: 200%;
     animation: gradientShift 10s infinite normal; /* настраиваем анимацию */
     box-shadow: var(--var--box-shadow);
 }
+
+.item-track.dragging {
+    opacity: 0.5;
+    background-color: #f0f0f0; /* Пример */
+}
+
+
 
 
  /*Обложка трек */

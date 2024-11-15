@@ -1,35 +1,101 @@
 let currentAudio = null;
 let currentPlayingTrack = null;
+let audioList = null;
+let tracks = [];
+let currentTrackIndex = -1; // Изменили на -1, чтобы изначально не было выбранного трека
+let isRepeat = true;
+let isShuffle = false;
+
+// Переменные для элементов управления
+let playBtn, pauseBtn, prevBtn, nextBtn, repeatBtn, shuffleBtn, volumeIcon;
+let timecodeSlider, timecodeStart, timecodeEnd;
+let volumeBar, volumeLevel;
+let coverImage, trackTitle, trackArtist;
 
 document.addEventListener("DOMContentLoaded", () => {
     const defaultTabButton = document.querySelector('.all-tracks');
-    const slider = document.querySelector('.timecode-slider');
-    const timecodeStart = document.querySelector('.timecode-start');
-    const timecodeEnd = document.querySelector('.timecode-end');
     audioList = document.querySelector('.track-list');
+
+    // Получение элементов управления
+    playBtn = document.getElementById('play-btn');
+    pauseBtn = document.getElementById('pause-btn');
+    prevBtn = document.getElementById('prev-btn');
+    nextBtn = document.getElementById('next-btn');
+    repeatBtn = document.getElementById('repeat-btn');
+    shuffleBtn = document.getElementById('shuffle-btn');
+    volumeIcon = document.getElementById('volume-icon');
+    timecodeSlider = document.querySelector('.timecode-slider');
+    timecodeStart = document.querySelector('.timecode-start');
+    timecodeEnd = document.querySelector('.timecode-end');
+    volumeBar = document.querySelector('.volume-bar');
+    volumeLevel = document.querySelector('.volume-level');
+    coverImage = document.getElementById('cover');
+    trackTitle = document.getElementById('title');
+    trackArtist = document.getElementById('artist');
 
     if (defaultTabButton) openTab({ currentTarget: defaultTabButton }, 'all-tracks');
 
-    if (slider && timecodeStart && timecodeEnd) {
-        let totalDuration = 196;
-
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+    // Привязка обработчиков событий
+    playBtn.addEventListener('click', () => {
+        if (currentAudio) {
+            currentAudio.play();
+            playBtn.style.display = 'none';
+            pauseBtn.style.display = 'inline-block';
+            currentPlayingTrack?.classList.add('playing');
         }
+    });
 
-        timecodeEnd.textContent = formatTime(totalDuration);
-        timecodeStart.textContent = formatTime(0);
+    pauseBtn.addEventListener('click', () => {
+        if (currentAudio) {
+            currentAudio.pause();
+            playBtn.style.display = 'inline-block';
+            pauseBtn.style.display = 'none';
+        }
+    });
 
-        slider.addEventListener('input', () => {
-            const value = slider.value;
-            const percentage = `${value}%`;
-            slider.style.background = `linear-gradient(to right, #707070 ${percentage}, #424242 ${percentage})`;
-            const currentTime = (value / 100) * totalDuration;
-            timecodeStart.textContent = formatTime(currentTime);
-        });
-    }
+    prevBtn.addEventListener('click', prevTrack);
+    nextBtn.addEventListener('click', nextTrack);
+
+    repeatBtn.addEventListener('click', () => {
+        isRepeat = !isRepeat;
+        repeatBtn.classList.toggle('active', isRepeat);
+    });
+
+    shuffleBtn.addEventListener('click', () => {
+        isShuffle = !isShuffle;
+        shuffleBtn.classList.toggle('active', isShuffle);
+    });
+
+    // Управление прогрессбаром при перемотке
+    timecodeSlider.addEventListener('input', () => {
+        if (currentAudio) {
+            currentAudio.currentTime = timecodeSlider.value;
+        }
+    });
+
+    // Управление громкостью
+    volumeBar.addEventListener('click', (e) => {
+        const rect = volumeBar.getBoundingClientRect();
+        const clickPosition = e.clientX - rect.left;
+        const volume = clickPosition / rect.width;
+        if (currentAudio) {
+            currentAudio.volume = volume;
+        }
+        volumeLevel.style.width = `${volume * 100}%`;
+    });
+
+    // Обновление иконки громкости
+    volumeIcon.addEventListener('click', () => {
+        if (currentAudio) {
+            if (currentAudio.volume > 0) {
+                currentAudio.volume = 0;
+                volumeLevel.style.width = '0%';
+            } else {
+                currentAudio.volume = 1;
+                volumeLevel.style.width = '100%';
+            }
+        }
+    });
 });
 
 function extractTitleAndArtistFromFilename(filename) {
@@ -43,6 +109,103 @@ function extractTitleAndArtistFromFilename(filename) {
     return { artist: "Unknown Artist", title: baseName };
 }
 
+const fs = require('fs');
+const path = require('path');
+const { parseBuffer } = require('music-metadata-browser');
+const audioDirectory = path.join('D:/Music');
+
+async function loadAudioFiles() {
+    if (!audioList) {
+        console.error("Элемент .track-list не найден");
+        return;
+    }
+
+    try {
+        const files = await fs.promises.readdir(audioDirectory);
+
+        const audioFiles = files.filter(file => {
+            const ext = path.extname(file).toLowerCase();
+            return ['.mp3', '.wav', '.flac', '.ogg'].includes(ext);
+        });
+
+        for (let i = 0; i < audioFiles.length; i++) {
+            const file = audioFiles[i];
+            const filePath = path.join(audioDirectory, file);
+            const trackInfo = await loadAudioMetadata(filePath);
+
+            if (trackInfo) {
+                const index = tracks.length; // Используем длину массива как индекс
+                trackInfo.index = index;
+                tracks.push(trackInfo);
+
+                // Создаем элемент списка треков
+                const audioItem = document.createElement('div');
+                audioItem.classList.add('item-track');
+                audioItem.dataset.index = index; // Сохраняем индекс трека
+
+                audioItem.innerHTML = `
+                    <div class="item-cover">
+                        ${trackInfo.cover ? `<img src="${trackInfo.cover}" />` : ''}
+                    </div>
+                    <div class="item-info">
+                        <div class="item-title">${trackInfo.title}</div>
+                        <div class="item-artist">${trackInfo.artist}</div>
+                    </div>
+                `;
+
+                if (!trackInfo.cover) {
+                    audioItem.querySelector('.item-cover').classList.add('default-cover');
+                }
+
+                audioItem.addEventListener('click', () => {
+                    if (currentTrackIndex === index) {
+                        togglePlayPause();
+                    } else {
+                        playTrackByIndex(index);
+                    }
+                });
+
+                if (audioList) {
+                    audioList.appendChild(audioItem);
+                } else {
+                    console.error("Ошибка: элемент track-list не найден для добавления");
+                }
+            }
+        }
+    } catch (err) {
+        console.error("Ошибка чтения папки:", err);
+    }
+}
+
+async function loadAudioMetadata(filePath) {
+    try {
+        const fileBuffer = fs.readFileSync(filePath);
+        const metadata = await parseBuffer(fileBuffer, { mimeType: 'audio/mpeg', size: fileBuffer.length });
+        let { title, artist, picture } = metadata.common;
+
+        if (!title || !artist) {
+            const extracted = extractTitleAndArtistFromFilename(path.basename(filePath));
+            title = title || extracted.title;
+            artist = artist || extracted.artist;
+        }
+
+        const cover = picture && picture.length > 0
+            ? `data:image/jpeg;base64,${Buffer.from(picture[0].data).toString('base64')}`
+            : path.join(__dirname, "1.png");
+
+        return {
+            title,
+            artist,
+            src: filePath,
+            cover,
+            metadata,
+            filename: path.basename(filePath)
+        };
+    } catch (error) {
+        console.error("Ошибка чтения метаданных:", error);
+        return null;
+    }
+}
 
 function openTab(evt, tabName) {
     let tabContents = document.getElementsByClassName("tab-content");
@@ -63,132 +226,161 @@ function openTab(evt, tabName) {
     }
 }
 
-const fs = require('fs');
-const path = require('path');
-const { parseBuffer } = require('music-metadata-browser');
-let audioList = null;
-const audioDirectory = path.join('D:/Music');
-
-function loadAudioFiles() {
-    if (!audioList) {
-        console.error("Элемент .track-list не найден");
-        return;
-    }
-
-    fs.readdir(audioDirectory, (err, files) => {
-        if (err) {
-            console.error("Ошибка чтения папки:", err);
-            return;
-        }
-
-        const audioFiles = files.filter(file => {
-            const ext = path.extname(file).toLowerCase();
-            return ['.mp3', '.wav', '.flac', '.ogg'].includes(ext);
-        });
-
-        audioFiles.forEach(file => {
-            const filePath = path.join(audioDirectory, file);
-            loadAudioMetadata(filePath);
-        });
-    });
-}
-
-async function loadAudioMetadata(filePath) {
-    try {
-        const fileBuffer = fs.readFileSync(filePath);
-        const metadata = await parseBuffer(fileBuffer, { mimeType: 'audio/mpeg', size: fileBuffer.length });
-        let { title, artist, picture } = metadata.common;
-
-        if (!title || !artist) {
-            const extracted = extractTitleAndArtistFromFilename(path.basename(filePath));
-            title = title || extracted.title;
-            artist = artist || extracted.artist;
-        }
-
-        const audioItem = document.createElement('div');
-        audioItem.classList.add('item-track');
-        audioItem.innerHTML = `
-            <div class="item-cover">
-                ${picture ? `<img src="data:image/jpeg;base64,${Buffer.from(picture[0].data).toString('base64')}" />` : ''}
-            </div>
-            <div class="item-info">
-                <div class="item-title">${title}</div>
-                <div class="item-artist">${artist}</div>
-            </div>
-        `;
-
-        if (!picture) {
-            audioItem.querySelector('.item-cover').classList.add('default-cover');
-        }
-
-        audioItem.addEventListener('click', () => togglePlayPause(filePath, metadata, audioItem));
-
-        if (audioList) {
-            audioList.appendChild(audioItem);
-        } else {
-            console.error("Ошибка: элемент track-list не найден для добавления");
-        }
-    } catch (error) {
-        console.error("Ошибка чтения метаданных:", error);
+function playTrackByIndex(index) {
+    const track = tracks[index];
+    if (track) {
+        currentTrackIndex = index;
+        playAudio(track.src, track.metadata, index, track.filename);
+    } else {
+        console.error(`Трек с индексом ${index} не найден.`);
     }
 }
 
-function togglePlayPause(filePath, metadata, audioItem) {
-    if (currentAudio && currentAudio.src === new URL(filePath, 'file://').href) {
+function togglePlayPause() {
+    if (currentAudio) {
         if (currentAudio.paused) {
             currentAudio.play().catch(error => console.error("Ошибка при возобновлении воспроизведения:", error));
-            audioItem.classList.add('playing');
-            document.body.classList.add('playing'); // Добавляем класс к body при воспроизведении
+            playBtn.style.display = 'none';
+            pauseBtn.style.display = 'inline-block';
+            currentPlayingTrack?.classList.add('playing');
         } else {
             currentAudio.pause();
-            audioItem.classList.remove('playing');
-            document.body.classList.remove('playing'); // Убираем класс при паузе
+            playBtn.style.display = 'inline-block';
+            pauseBtn.style.display = 'none';
         }
-    } else {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentPlayingTrack?.classList.remove('playing');
-            document.body.classList.remove('playing'); // Убираем класс для предыдущего трека
-        }
-        playAudio(filePath, metadata, audioItem);
     }
 }
 
-function playAudio(filePath, metadata, audioItem) {
+function playAudio(filePath, metadata, index, filename) {
     if (currentAudio) {
         currentAudio.pause();
     }
 
     currentAudio = new Audio(filePath);
     currentAudio.play().catch(error => console.error("Ошибка при воспроизведении аудио:", error));
-    currentPlayingTrack = audioItem;
-    audioItem.classList.add('playing');
 
-    const titleElement = document.getElementById('title');
-    const artistElement = document.getElementById('artist');
-    const coverElement = document.getElementById('cover');
+    // Обновление UI
+    updatePlayerUI(metadata, filePath, filename);
 
-    if (titleElement && artistElement && coverElement) {
-        const { title, artist } = metadata?.common?.title && metadata?.common?.artist
-            ? { title: metadata.common.title, artist: metadata.common.artist }
-            : extractTitleAndArtistFromFilename(path.basename(filePath));
+    // Обновление кнопок воспроизведения
+    playBtn.style.display = 'none';
+    pauseBtn.style.display = 'inline-block';
 
-        titleElement.textContent = title || 'Unknown Title';
-        artistElement.textContent = artist || 'Unknown Artist';
-
-        if (metadata?.common?.picture && metadata.common.picture.length > 0) {
-            const coverData = metadata.common.picture[0].data;
-            coverElement.src = `data:image/jpeg;base64,${Buffer.from(coverData).toString('base64')}`;
-            coverElement.style.display = 'block';
-        } else {
-            coverElement.src = path.join(__dirname, "1.png");
-            coverElement.style.display = 'block';
-        }
-    } else {
-        console.error("Элементы title, artist или cover не найдены в плеере");
+    // Обновление текущего трека
+    if (currentPlayingTrack) {
+        currentPlayingTrack.classList.remove('playing');
+    }
+    currentPlayingTrack = document.querySelector(`.item-track[data-index='${index}']`);
+    if (currentPlayingTrack) {
+        currentPlayingTrack.classList.add('playing');
     }
 
-    currentAudio.addEventListener('ended', () => {
-        audioItem.classList.remove('playing');
+    // Обновление времени окончания после загрузки метаданных
+    currentAudio.addEventListener('loadedmetadata', () => {
+        timecodeEnd.textContent = formatTime(currentAudio.duration);
+        timecodeSlider.max = Math.floor(currentAudio.duration);
     });
+
+    // Обновление прогрессбара во время воспроизведения
+    currentAudio.addEventListener('timeupdate', updateTime);
+
+    // Обработчик окончания трека
+    currentAudio.addEventListener('ended', () => {
+        if (isRepeat) {
+            currentAudio.currentTime = 0;
+            currentAudio.play();
+        } else {
+            nextTrack();
+        }
+    });
+
+    // Обновление громкости при старте трека
+    if (currentAudio) {
+        currentAudio.volume = parseFloat(volumeLevel.style.width) / 100 || 1;
+        currentAudio.addEventListener('volumechange', updateVolumeIcon);
+    }
+}
+
+function updatePlayerUI(metadata, filePath, filename) {
+    let title = metadata.common.title;
+    let artist = metadata.common.artist;
+
+    if (!title || !artist) {
+        const extracted = extractTitleAndArtistFromFilename(filename);
+        title = title || extracted.title;
+        artist = artist || extracted.artist;
+    }
+
+    trackTitle.textContent = title || filename || 'Unknown Title';
+    trackArtist.textContent = artist || 'Unknown Artist';
+
+    if (metadata.common.picture && metadata.common.picture.length > 0) {
+        const coverData = metadata.common.picture[0].data;
+        coverImage.src = `data:image/jpeg;base64,${Buffer.from(coverData).toString('base64')}`;
+    } else {
+        coverImage.src = path.join(__dirname, "1.png");
+    }
+}
+
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60) || 0;
+    const secs = Math.floor(seconds % 60) || 0;
+    return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+
+function updateTime() {
+    if (currentAudio && timecodeStart && timecodeSlider) {
+        timecodeStart.textContent = formatTime(currentAudio.currentTime);
+        timecodeSlider.value = currentAudio.currentTime;
+        const progressPercent = (currentAudio.currentTime / currentAudio.duration) * 100;
+        timecodeSlider.style.background = `linear-gradient(to right, #00dcff ${progressPercent}%, #707070 ${progressPercent}%)`;
+    }
+}
+
+timecodeSlider.addEventListener('input', () => {
+    if (currentAudio) {
+        currentAudio.currentTime = timecodeSlider.value;
+        const progressPercent = (currentAudio.currentTime / currentAudio.duration) * 100;
+        timecodeSlider.style.background = `linear-gradient(to right, #00dcff ${progressPercent}%, #707070 ${progressPercent}%)`;
+    }
+});
+
+function prevTrack() {
+    if (tracks.length === 0) return;
+    if (isShuffle) {
+        playRandomTrack();
+    } else {
+        currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+        playTrackByIndex(currentTrackIndex);
+    }
+}
+
+function nextTrack() {
+    if (tracks.length === 0) return;
+    if (isShuffle) {
+        playRandomTrack();
+    } else {
+        currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+        playTrackByIndex(currentTrackIndex);
+    }
+}
+
+function updateVolumeIcon() {
+    if (currentAudio.volume === 0) {
+        volumeIcon.textContent = '🔇';
+    } else if (currentAudio.volume < 0.5) {
+        volumeIcon.textContent = '🔉';
+    } else {
+        volumeIcon.textContent = '🔊';
+    }
+}
+
+function playRandomTrack() {
+    if (tracks.length === 0) return;
+    let randomIndex = Math.floor(Math.random() * tracks.length);
+    while (randomIndex === currentTrackIndex && tracks.length > 1) {
+        randomIndex = Math.floor(Math.random() * tracks.length);
+    }
+    currentTrackIndex = randomIndex;
+    playTrackByIndex(currentTrackIndex);
 }
