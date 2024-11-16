@@ -341,7 +341,7 @@ timecodeSlider.addEventListener('input', () => {
     if (currentAudio) {
         currentAudio.currentTime = timecodeSlider.value;
         const progressPercent = (currentAudio.currentTime / currentAudio.duration) * 100;
-        timecodeSlider.style.background = `linear-gradient(to right, #00dcff ${progressPercent}%, #707070 ${progressPercent}%)`;
+        timecodeSlider.style.background = `#00dcff ${progressPercent}%`;
     }
 });
 

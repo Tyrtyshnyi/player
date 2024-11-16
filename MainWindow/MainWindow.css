@@ -30,6 +30,8 @@ body {
 }
 
 
+
+
 .left-panel{
     outline: none;
     bottom: 0;
@@ -133,4 +135,9 @@ body {
 /* Активная вкладка отображается */
 .tab-content.active {
     display: block;
+}
+
+::selection {
+    background-color: rgba(95, 246, 242, 0.51); /* Цвет выделения */
+    color: black; /* Цвет текста при выделении */
 }
