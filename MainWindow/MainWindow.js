@@ -1,8 +1,9 @@
+// MainWindow.js
+
 let currentAudio = null;
 let currentPlayingTrack = null;
-let audioList = null;
 let tracks = [];
-let currentTrackIndex = -1; // Изменили на -1, чтобы изначально не было выбранного трека
+let currentTrackIndex = -1; // Начинаем без выбранного трека
 let isRepeat = true;
 let isShuffle = false;
 
@@ -13,9 +14,6 @@ let volumeBar, volumeLevel;
 let coverImage, trackTitle, trackArtist;
 
 document.addEventListener("DOMContentLoaded", () => {
-    const defaultTabButton = document.querySelector('.all-tracks');
-    audioList = document.querySelector('.track-list');
-
     // Получение элементов управления
     playBtn = document.getElementById('play-btn');
     pauseBtn = document.getElementById('pause-btn');
@@ -32,8 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
     coverImage = document.getElementById('cover');
     trackTitle = document.getElementById('title');
     trackArtist = document.getElementById('artist');
-
-    if (defaultTabButton) openTab({ currentTarget: defaultTabButton }, 'all-tracks');
 
     // Привязка обработчиков событий
     playBtn.addEventListener('click', () => {
@@ -70,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     timecodeSlider.addEventListener('input', () => {
         if (currentAudio) {
             currentAudio.currentTime = timecodeSlider.value;
+            updateTime();
         }
     });
 
@@ -98,114 +95,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-function extractTitleAndArtistFromFilename(filename) {
-    const baseName = filename.replace(/\.[^/.]+$/, "");
-    const parts = baseName.split(" - ");
-    if (parts.length >= 2) {
-        const artist = parts[0].trim();
-        const title = parts.slice(1).join(" - ").trim();
-        return { artist, title };
-    }
-    return { artist: "Unknown Artist", title: baseName };
-}
 
-const fs = require('fs');
-const path = require('path');
-const { parseBuffer } = require('music-metadata-browser');
-const audioDirectory = path.join('D:/Music');
+document.addEventListener("DOMContentLoaded", () => {
+    const defaultTabButton = document.querySelector('.all-tracks');
+    audioList = document.querySelector('.track-list');
 
-async function loadAudioFiles() {
-    if (!audioList) {
-        console.error("Элемент .track-list не найден");
-        return;
-    }
-
-    try {
-        const files = await fs.promises.readdir(audioDirectory);
-
-        const audioFiles = files.filter(file => {
-            const ext = path.extname(file).toLowerCase();
-            return ['.mp3', '.wav', '.flac', '.ogg'].includes(ext);
-        });
-
-        for (let i = 0; i < audioFiles.length; i++) {
-            const file = audioFiles[i];
-            const filePath = path.join(audioDirectory, file);
-            const trackInfo = await loadAudioMetadata(filePath);
-
-            if (trackInfo) {
-                const index = tracks.length; // Используем длину массива как индекс
-                trackInfo.index = index;
-                tracks.push(trackInfo);
-
-                // Создаем элемент списка треков
-                const audioItem = document.createElement('div');
-                audioItem.classList.add('item-track');
-                audioItem.dataset.index = index; // Сохраняем индекс трека
-
-                audioItem.innerHTML = `
-                    <div class="item-cover">
-                        ${trackInfo.cover ? `<img src="${trackInfo.cover}" />` : ''}
-                    </div>
-                    <div class="item-info">
-                        <div class="item-title">${trackInfo.title}</div>
-                        <div class="item-artist">${trackInfo.artist}</div>
-                    </div>
-                `;
-
-                if (!trackInfo.cover) {
-                    audioItem.querySelector('.item-cover').classList.add('default-cover');
-                }
-
-                audioItem.addEventListener('click', () => {
-                    if (currentTrackIndex === index) {
-                        togglePlayPause();
-                    } else {
-                        playTrackByIndex(index);
-                    }
-                });
-
-                if (audioList) {
-                    audioList.appendChild(audioItem);
-                } else {
-                    console.error("Ошибка: элемент track-list не найден для добавления");
-                }
-            }
-        }
-    } catch (err) {
-        console.error("Ошибка чтения папки:", err);
-    }
-}
-
-async function loadAudioMetadata(filePath) {
-    try {
-        const fileBuffer = fs.readFileSync(filePath);
-        const metadata = await parseBuffer(fileBuffer, { mimeType: 'audio/mpeg', size: fileBuffer.length });
-        let { title, artist, picture } = metadata.common;
-
-        if (!title || !artist) {
-            const extracted = extractTitleAndArtistFromFilename(path.basename(filePath));
-            title = title || extracted.title;
-            artist = artist || extracted.artist;
-        }
-
-        const cover = picture && picture.length > 0
-            ? `data:image/jpeg;base64,${Buffer.from(picture[0].data).toString('base64')}`
-            : path.join(__dirname, "1.png");
-
-        return {
-            title,
-            artist,
-            src: filePath,
-            cover,
-            metadata,
-            filename: path.basename(filePath)
-        };
-    } catch (error) {
-        console.error("Ошибка чтения метаданных:", error);
-        return null;
-    }
-}
+    if (defaultTabButton) openTab({ currentTarget: defaultTabButton }, 'all-tracks');
+});
 
 function openTab(evt, tabName) {
     let tabContents = document.getElementsByClassName("tab-content");
@@ -219,13 +115,27 @@ function openTab(evt, tabName) {
     }
 
     document.getElementById(tabName)?.classList.add("active");
-    evt.currentTarget.classList.add("active");
+    evt.currentTarget.classList.add('active');
 
     if (tabName === 'all-tracks') {
         loadAudioFiles();
     }
 }
 
+
+// Функция для извлечения названия и исполнителя из имени файла
+function extractTitleAndArtistFromFilename(filename) {
+    const baseName = filename.replace(/\.[^/.]+$/, "");
+    const parts = baseName.split(" - ");
+    if (parts.length >= 2) {
+        const artist = parts[0].trim();
+        const title = parts.slice(1).join(" - ").trim();
+        return { artist, title };
+    }
+    return { artist: "Unknown Artist", title: baseName };
+}
+
+// Функция для воспроизведения трека по индексу
 function playTrackByIndex(index) {
     const track = tracks[index];
     if (track) {
@@ -278,7 +188,7 @@ function playAudio(filePath, metadata, index, filename) {
     // Обновление времени окончания после загрузки метаданных
     currentAudio.addEventListener('loadedmetadata', () => {
         timecodeEnd.textContent = formatTime(currentAudio.duration);
-        timecodeSlider.max = Math.floor(currentAudio.duration);
+        timecodeSlider.max = currentAudio.duration;
     });
 
     // Обновление прогрессбара во время воспроизведения
@@ -336,14 +246,6 @@ function updateTime() {
         timecodeSlider.style.background = `linear-gradient(to right, #00dcff ${progressPercent}%, #707070 ${progressPercent}%)`;
     }
 }
-
-timecodeSlider.addEventListener('input', () => {
-    if (currentAudio) {
-        currentAudio.currentTime = timecodeSlider.value;
-        const progressPercent = (currentAudio.currentTime / currentAudio.duration) * 100;
-        timecodeSlider.style.background = `#00dcff ${progressPercent}%`;
-    }
-});
 
 function prevTrack() {
     if (tracks.length === 0) return;

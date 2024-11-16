@@ -98,11 +98,14 @@
 
     width: 100%;
     margin-left: 30px;
+    padding:5px;
     cursor: pointer;
     user-select: text;
     display: flex;
     flex-direction: column;
     position: relative;
+
+    /*outline: solid 1px #505050;*/
 }
 
 .track-title {
@@ -143,8 +146,12 @@
     display: flex; /* Используем flex для кнопок управления */
     justify-content: center; /* Центрируем кнопки внутри блока */
     /*gap: 5px; !* Отступы между кнопками *!*/
-    width: 100%; /* Занимает всю ширину родительского контейнера */
-    margin: 15px 0 10px 0;
+    width: 20%; /* Занимает всю ширину родительского контейнера */
+    margin: 10px 0 10px 0;
+    box-shadow: var(--var-box-shadow-buttons);
+    background-color: transparent;
+    border-radius: var(--var--inner-radius);
+    /*outline: solid 1px #505050;*/
 }
 
 .controls-track-global{
@@ -176,6 +183,8 @@
     align-items: center;
     gap: 10px;
     width: 100%;
+    padding:2px;
+    /*outline: solid 1px #505050;*/
 
 }
 
@@ -202,7 +211,7 @@
 .timecode-slider::-webkit-slider-runnable-track {
     height: 6px;
     border-radius: 10px;
-    background: #00dcff; /* Базовый цвет трека */
+    background: #ffffff; /* Базовый цвет трека */
     transition: 0.3s ease-in-out;
 }
 
@@ -263,3 +272,4 @@
     border-radius: 50%;
     cursor: pointer;
 }
+
