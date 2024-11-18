@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./Settings/Settings.css">
     <link rel="stylesheet" href="./Search/Search.css">
     <link rel="stylesheet" href="./Player/Player.css">
+    <link rel="stylesheet" href="./playTrack.css">
     <!--JavaScript-->
     <script src="MainWindow.js"></script>
     <script src="./AllTracks/AllTracks.js"></script>
@@ -39,21 +40,21 @@
 
     <div id="all-tracks" class="tab-content">
 
+        <div class="blur-search-container">
+            <input type="text"  class="search-bar" placeholder="Search for tracks...">
+        </div>
+
         <!-- Список треков -->
         <div class="track-list">
 
             <!-- Поле поиска -->
-            <div class="blur-search-container">
-              <input type="text"  class="search-bar" placeholder="Search for tracks...">
-            </div>
 
 <!--              Шаблон трека-->
-
             <div class="item-track" id="track1">
                 <div class="item-cover"></div>
                 <div class="item-info">
-                    <div class="item-title">dsadsa</div>
-                    <div class="item-artist">dsadas</div>
+                    <div class="item-title"></div>
+                    <div class="item-artist"></div>
                     <button class="item-context-menu"></button>
                 </div>
             </div>
@@ -141,7 +142,7 @@
 <div class="player">
     <div class="track-info">
         <div class="track-cover">
-            <img id="cover" src="1.png" alt="Cover Image" >
+            <img id="cover" src="./1.png" alt="Cover Image" >
         </div>
 
         <div class="track-meta">

@@ -1,0 +1,78 @@
+/* Элемент трека */
+.item-track {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: var(--var--outer-radius);
+    padding: 8px;
+    width: 100%;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.5s ease;
+    /*outline: solid 1px #505050;*/
+}
+
+.item-track:hover {
+    box-shadow: var(--var--box-shadow);
+    background-color: var(--var--background-2);
+}
+
+.item-track:active {
+    transform: scale(0.997);
+
+}
+
+@keyframes gradientShift {
+    to {
+        background-position: -200% ;
+    }
+}
+
+.item-track.playing {
+    background: var(--var--background-accent-4);
+    background-size: 200%;
+    animation: gradientShift 10s infinite normal; /* настраиваем анимацию */
+    box-shadow: var(--var--box-shadow);
+}
+
+.item-track.dragging {
+    opacity: 0.5;
+    background-color: #f0f0f0; /* Пример */
+}
+
+
+
+
+/*Обложка трек */
+.item-cover {
+    background-color: var(--var--background-main);
+    width: 64px;
+    height: 64px;
+    border-radius: var(--var--inner-radius);
+    margin-right: 20px;
+    box-shadow: var(--var--box-shadow);
+    border: var(--var--border);
+    transition: var(--var--transition-slow);
+    /*outline: solid 1px #505050;*/
+}
+.item-cover:hover{
+    box-shadow: none;
+}
+
+/* Пример CSS для обложки аудиофайлов */
+.item-cover img {
+    /*margin:0 20px 2px 0;*/
+    width: 62px;
+    height: 62px;
+    object-fit: cover; /* Сохраняет пропорции изображения, обрезая по краям, если нужно */
+    border-radius: var(--var--inner-radius);
+}
+
+/* Информация о треке */
+.item-info {
+    flex-grow: 1;
+}
+
+.track-title {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}

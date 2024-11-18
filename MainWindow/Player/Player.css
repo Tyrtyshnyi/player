@@ -23,8 +23,7 @@
 
     border: var(--var--border);
     height: 80px;
-    /*background: var(--var--background-1);*/
-    /*background-image:var(--var--background-accent-1);*/
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -85,9 +84,7 @@
 
 .track-meta {
 
-    overflow: hidden; /* Обрезка текста */
-    text-overflow: ellipsis; /* Добавление многоточия */
-    white-space: nowrap; /* Запрет переноса текста */
+
 
     background-image: var(--var--background-accent-3);
     background-size: 200%; /* Длина фона для плавного перехода */
@@ -97,6 +94,7 @@
     animation: metaGradient 10s linear infinite; /* Запускаем анимацию */
 
     width: 100%;
+    max-width: 300px;
     margin-left: 30px;
     padding:5px;
     cursor: pointer;
@@ -109,10 +107,13 @@
 }
 
 .track-title {
+    overflow: hidden; /* Обрезка текста */
+    text-overflow: ellipsis; /* Добавление многоточия */
+    white-space: nowrap; /* Запрет переноса текста */
 
     font-size: 15px;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     /*color: #cbcbcb;*/
     display: inline-block;
     /*outline: solid 1px #505050;*/
@@ -130,9 +131,8 @@
 
 
 
-
 .main-controls {
-    height: 80px; /* Высота может быть адаптивной */
+    height: auto; /* Высота может быть адаптивной */
     width: 50%;
     margin: 0 auto; /* Центрируем основной блок относительно родителя */
     display: flex;
@@ -142,15 +142,13 @@
 }
 
 
+
 .controls-track-local {
     display: flex; /* Используем flex для кнопок управления */
     justify-content: center; /* Центрируем кнопки внутри блока */
-    /*gap: 5px; !* Отступы между кнопками *!*/
-    width: 20%; /* Занимает всю ширину родительского контейнера */
-    margin: 10px 0 10px 0;
-    box-shadow: var(--var-box-shadow-buttons);
-    background-color: transparent;
-    border-radius: var(--var--inner-radius);
+    width: 100%; /* Занимает всю ширину родительского контейнера */
+    margin: 15px 0 8px 0;
+
     /*outline: solid 1px #505050;*/
 }
 
