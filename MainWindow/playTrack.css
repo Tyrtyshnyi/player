@@ -6,7 +6,7 @@
     border-radius: var(--var--outer-radius);
     padding: 8px;
     width: 100%;
-    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.5s ease;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
     /*outline: solid 1px #505050;*/
 }
 
@@ -50,10 +50,11 @@
     margin-right: 20px;
     box-shadow: var(--var--box-shadow);
     border: var(--var--border);
-    transition: var(--var--transition-slow);
+    transition: var(--var--transition-medium);
     /*outline: solid 1px #505050;*/
 }
 .item-cover:hover{
+    transition: var(--var--transition-medium);
     box-shadow: none;
 }
 

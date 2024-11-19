@@ -47,6 +47,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("Загрузка аудиофайлов...");
     await loadAudioFiles(audioDirectory);
 
+    // Устанавливаем вкладку по умолчанию активной при загрузке приложения
+    const savedTabValue = localStorage.getItem("defaultTab") || "1";
+    const defaultTabName = getTabNameByValue(savedTabValue);
+
+    console.log(`Открытие вкладки по умолчанию: ${defaultTabName}`);
+    openDefaultTab(defaultTabName);
 });
 
 function initPlayer() {
@@ -132,6 +138,35 @@ function initPlayer() {
     });
 }
 
+// Функция для открытия вкладки по умолчанию при загрузке приложения
+function openDefaultTab(tabName) {
+    const defaultTabButton = document.querySelector(`.left-panel-button[data-tab="${tabName}"]`);
+    if (defaultTabButton) {
+        console.log(`Кнопка для вкладки "${tabName}" найдена. Открываем вкладку...`);
+        openTab({ currentTarget: defaultTabButton }, tabName);
+    } else {
+        console.error(`Кнопка для вкладки "${tabName}" не найдена. Проверьте наличие атрибута data-tab.`);
+    }
+}
+
+function getTabNameByValue(value) {
+    switch (value) {
+        case "1":
+            return "home";
+        case "2":
+            return "all-tracks";
+        case "3":
+            return "playlists";
+        case "4":
+            return "favorite";
+        case "5":
+            return "search";
+        default:
+            console.warn(`Неизвестное значение вкладки: ${value}. Используем "home".`);
+            return "home";
+    }
+}
+
 function openTab(evt, tabName) {
     console.log(`Открытие вкладки: ${tabName}`);
     let tabContents = document.getElementsByClassName("tab-content");
@@ -145,13 +180,12 @@ function openTab(evt, tabName) {
     }
 
     document.getElementById(tabName)?.classList.add("active");
-    evt.currentTarget.classList.add('active');
+    evt?.currentTarget?.classList.add('active');
 
     if (tabName === 'all-tracks') {
         displayTracks();
     }
 }
-
 
 // Рекурсивная функция для загрузки аудиофайлов из директории и её поддиректорий
 async function loadAudioFiles(directory) {
@@ -226,6 +260,8 @@ function displayTracks() {
         return;
     }
 
+
+
     // Очищаем предыдущий список, если есть
     audioList.innerHTML = '';
 
@@ -240,7 +276,7 @@ function displayTracks() {
 
         audioItem.innerHTML = `
             <div class="item-cover">
-                <img src="${track.cover}" />
+                <img alt="Cover Image" src="${track.cover}" />
             </div>
             <div class="item-info">
                 <div class="item-title">${track.title}</div>
@@ -447,3 +483,8 @@ function playRandomTrack() {
     currentTrackIndex = randomIndex;
     playTrackByIndex(currentTrackIndex);
 }
+
+// Экспортируем функции в глобальную область видимости
+window.openTab = openTab;
+window.displayTracks = displayTracks;
+window.getTabNameByValue = getTabNameByValue;

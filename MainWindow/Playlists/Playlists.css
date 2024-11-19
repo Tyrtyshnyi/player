@@ -1,0 +1,88 @@
+/* Кнопка "Add Playlist" */
+.add-playlist-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    background-color: #00dcff;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Контейнер для плейлистов */
+.playlists-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Плейлист */
+.playlist-item {
+    width: calc(25% - 20px); /* 25% минус отступы */
+    box-sizing: border-box;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.playlist-item:hover {
+    background-color: #e0e0e0;
+}
+
+/* Фиксированный размер плейлиста при изменении ширины окна */
+.playlist-item {
+    flex: 0 0 calc(25% - 20px);
+}
+
+/* Обложка плейлиста */
+.playlist-cover img {
+    width: 100%;
+    height: auto;
+}
+
+/* Кнопки внизу плейлиста */
+.playlist-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.playlist-btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Стили для содержимого плейлиста */
+.playlist-content {
+    /* Изначально скрыто */
+}
+
+.back-btn {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Адаптивность */
+@media screen and (max-width: 1000px) {
+    .playlist-item {
+        flex: 0 0 calc(33.333% - 20px);
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .playlist-item {
+        flex: 0 0 calc(50% - 20px);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .playlist-item {
+        flex: 0 0 calc(100% - 20px);
+    }
+}
