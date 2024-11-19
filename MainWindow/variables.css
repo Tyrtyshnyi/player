@@ -1,4 +1,5 @@
 :root{
+    --var--border-radius: 10px;
     --var--outer-radius: 24px;
     --var--inner-radius: 16px;
 

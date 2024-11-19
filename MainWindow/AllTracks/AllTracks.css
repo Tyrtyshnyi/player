@@ -63,7 +63,7 @@
 }
 
 .search-bar:focus{
-    background-color: var(--var--background-2);
+    background-color: var(--var--background-0);
     box-shadow: none;
     transition: var(--var--transition-slow);
 }

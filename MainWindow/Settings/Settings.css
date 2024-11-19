@@ -36,7 +36,7 @@
     padding: 15px;
     margin-bottom: 15px;
     box-shadow: var(--var-box-shadow-buttons);
-    cursor: pointer;
+    /*cursor: pointer;*/
     transition: var(--var--transition-fast);
 }
 
@@ -48,6 +48,7 @@
 }
 
 .dropdown{
+    cursor: pointer;
     color: white;
     padding: 5px;
     border: var(--var--border);
@@ -60,8 +61,8 @@
 
 .dropdown option {
     cursor: pointer;
-    background-color: var(--var--background-4);
-    color: #000000;
+    background-color: var(--var--background-2);
+    color: white;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
@@ -76,4 +77,16 @@
     cursor:pointer;
     background-color: var(--var--background-1);
     /*outline: solid red;*/
+}
+
+.selected-directory{
+    color: #00a0c4;
+    height: 30px;
+    cursor: pointer;
+    box-shadow: var(--var-box-shadow-buttons);
+    border-radius: var(--var--border-radius);
+    padding:5px 10px 5px 10px;
+    margin: 10px 0 10px 0;
+    width: 50%;
+    background-color: var(--var--background-2);
 }

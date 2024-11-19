@@ -11,34 +11,35 @@
     <link rel="stylesheet" href="./Search/Search.css">
     <link rel="stylesheet" href="./Player/Player.css">
     <link rel="stylesheet" href="./playTrack.css">
+    <link rel="stylesheet" href="./Playlists/Playlists.css">
     <!--JavaScript-->
     <script src="MainWindow.js"></script>
     <script src="./AllTracks/AllTracks.js"></script>
     <script src="./Settings/Settings.js"></script>
     <script src="./Search/Search.js"></script>
     <script src="./Player/Player.js"></script>
-
+    <script src="./Playlists/Playlists.js"></script>
 
 </head>
 <body>
 
 <div class="left-panel">
-    <button class="left-panel-button home-button" onclick="openTab(event, 'home')">Home</button>
-    <button class="left-panel-button all-tracks" onclick="openTab(event, 'all-tracks')">All Tracks</button>
-    <button class="left-panel-button" onclick="openTab(event, 'playlists')">Playlists</button>
-    <button class="left-panel-button" onclick="openTab(event, 'favorite')">Favorite</button>
-    <button class="left-panel-button" onclick="openTab(event, 'search')">Search</button>
-    <button class="left-panel-button" onclick="openTab(event, 'settings')">Settings</button>
+    <button class="left-panel-button home-button" data-tab="home" onclick="openTab(event, 'home')">Home</button>
+    <button class="left-panel-button all-tracks" data-tab="all-tracks" onclick="openTab(event, 'all-tracks')">All Tracks</button>
+    <button class="left-panel-button" data-tab="playlists" onclick="openTab(event, 'playlists')">Playlists</button>
+    <button class="left-panel-button" data-tab="favorite" onclick="openTab(event, 'favorite')">Favorite</button>
+    <button class="left-panel-button" data-tab="search" onclick="openTab(event, 'search')">Search</button>
+    <button class="left-panel-button" data-tab="settings" onclick="openTab(event, 'settings')">Settings</button>
 </div>
 
 
 <!-- Контейнер для основного контента -->
 <div class="main-content">
-    <div id="home" class="tab-content active">
+    <div id="home" class="tab-content ">
         fffffffffff
     </div>
 
-    <div id="all-tracks" class="tab-content">
+    <div id="all-tracks" class="tab-content ">
 
         <div class="blur-search-container">
             <input type="text"  class="search-bar" placeholder="Search for tracks...">
@@ -63,23 +64,23 @@
         </div>
     </div>
 
-    <div id="playlists" class="tab-content">
+    <div id="playlists" class="tab-content ">
         <h2>Playlists Content</h2>
         <p>Здесь будет информация о плейлистах.</p>
     </div>
 
-    <div id="favorite" class="tab-content">
+    <div id="favorite" class="tab-content ">
         <h2>Favorite Content</h2>
         <p>Ваши любимые треки появятся здесь.</p>
     </div>
 
-    <div id="search" class="tab-content">
+    <div id="search" class="tab-content ">
         <div class="search-container">
             <input type="text" class="search-bar tab-search-bar" placeholder="Search...">
         </div>
     </div>
 
-    <div id="settings" class="tab-content">
+    <div id="settings" class="tab-content ">
         <div class="settings-container">
 
 
@@ -113,6 +114,12 @@
                 <h3>Backend</h3>
                 <div class="settings-item">
                     Поиск по папкам:
+                    <div class="selected-directory">D/Music</div>
+                    <div class="selected-directory"></div>
+                    <div class="selected-directory"></div>
+                    <div class="selected-directory"></div>
+
+
                 </div>
 
                 <div class="settings-item">
@@ -133,8 +140,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 

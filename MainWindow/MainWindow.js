@@ -47,12 +47,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("Загрузка аудиофайлов...");
     await loadAudioFiles(audioDirectory);
 
-    // Устанавливаем первую вкладку активной
-    const defaultTabButton = document.querySelector('.all-tracks');
-    if (defaultTabButton) {
-        console.log("Открытие вкладки 'All Tracks'");
-        openTab({ currentTarget: defaultTabButton }, 'all-tracks');
-    }
 });
 
 function initPlayer() {
@@ -157,6 +151,7 @@ function openTab(evt, tabName) {
         displayTracks();
     }
 }
+
 
 // Рекурсивная функция для загрузки аудиофайлов из директории и её поддиректорий
 async function loadAudioFiles(directory) {
