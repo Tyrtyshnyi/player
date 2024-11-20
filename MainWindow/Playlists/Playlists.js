@@ -22,4 +22,17 @@ document.addEventListener("DOMContentLoaded", () => {
         // Скрываем содержимое плейлиста
         playlistContent.style.display = 'none';
     });
+
+
+
+
+    // Предотвращаем открытие плейлиста при клике на название
+    const playlistNames = document.querySelectorAll('.playlist-name');
+    playlistNames.forEach((name) => {
+        name.addEventListener('click', (event) => {
+            event.stopPropagation();
+            // Здесь можно добавить дополнительную логику, если нужно
+            console.log('Клик на название плейлиста');
+        });
+    });
 });

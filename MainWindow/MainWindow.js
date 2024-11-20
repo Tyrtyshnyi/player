@@ -14,6 +14,9 @@ let timecodeSlider, timecodeStart, timecodeEnd;
 let volumeBar, volumeLevel;
 let coverImage, trackTitle, trackArtist;
 
+// Переменная для отслеживания перетаскивания громкости
+let isVolumeDragging = false;
+
 // Импорт необходимых модулей
 const fs = require('fs');
 const path = require('path');
@@ -110,16 +113,22 @@ function initPlayer() {
         }
     });
 
-    // Управление громкостью
-    volumeBar.addEventListener('click', (e) => {
-        const rect = volumeBar.getBoundingClientRect();
-        const clickPosition = e.clientX - rect.left;
-        const volume = clickPosition / rect.width;
-        if (currentAudio) {
-            currentAudio.volume = volume;
-            console.log(`Установлена громкость: ${Math.round(volume * 100)}%`);
+    // Управление громкостью при клике и перетаскивании
+    volumeBar.addEventListener('mousedown', (e) => {
+        isVolumeDragging = true;
+        setVolume(e);
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (isVolumeDragging) {
+            setVolume(e);
         }
-        volumeLevel.style.width = `${volume * 100}%`;
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (isVolumeDragging) {
+            isVolumeDragging = false;
+        }
     });
 
     // Обновление иконки громкости
@@ -134,8 +143,26 @@ function initPlayer() {
                 volumeLevel.style.width = '100%';
                 console.log("Звук включен на 100%");
             }
+            updateVolumeIcon();
         }
     });
+
+    // Инициализация ползунка времени на 0
+    timecodeSlider.value = 0;
+    timecodeStart.textContent = '00:00';
+    timecodeEnd.textContent = '00:00';
+}
+
+function setVolume(e) {
+    const rect = volumeBar.getBoundingClientRect();
+    let volume = (e.clientX - rect.left) / rect.width;
+    volume = Math.max(0, Math.min(volume, 1)); // Ограничиваем диапазон от 0 до 1
+    if (currentAudio) {
+        currentAudio.volume = volume;
+        console.log(`Установлена громкость: ${Math.round(volume * 100)}%`);
+    }
+    volumeLevel.style.width = `${volume * 100}%`;
+    updateVolumeIcon();
 }
 
 // Функция для открытия вкладки по умолчанию при загрузке приложения
@@ -213,6 +240,17 @@ async function loadAudioFiles(directory) {
                 }
             }
         }
+
+        // После загрузки всех аудиофайлов проверяем наличие сохраненного трека
+        const lastPlayedIndex = localStorage.getItem('lastPlayedTrackIndex');
+        if (lastPlayedIndex !== null && tracks.length > 0) {
+            currentTrackIndex = parseInt(lastPlayedIndex, 10);
+            if (currentTrackIndex >= 0 && currentTrackIndex < tracks.length) {
+                const track = tracks[currentTrackIndex];
+                // Инициализируем плеер без автоматического воспроизведения
+                loadTrackIntoPlayer(track.src, track.metadata, currentTrackIndex, track.filename);
+            }
+        }
     } catch (err) {
         console.error("Ошибка чтения папки:", err);
     }
@@ -259,8 +297,6 @@ function displayTracks() {
         console.error("Элемент .track-list не найден");
         return;
     }
-
-
 
     // Очищаем предыдущий список, если есть
     audioList.innerHTML = '';
@@ -317,6 +353,7 @@ function playTrackByIndex(index) {
     if (track) {
         currentTrackIndex = index;
         playAudio(track.src, track.metadata, index, track.filename);
+        localStorage.setItem('lastPlayedTrackIndex', index); // Сохраняем индекс последнего трека
     } else {
         console.error(`Трек с индексом ${index} не найден.`);
     }
@@ -370,11 +407,15 @@ function playAudio(filePath, metadata, index, filename) {
     currentAudio.addEventListener('loadedmetadata', () => {
         timecodeEnd.textContent = formatTime(currentAudio.duration);
         timecodeSlider.max = currentAudio.duration || 0;
+        updateTime(); // Обновляем время сразу после загрузки метаданных
         console.log(`Длительность трека: ${formatTime(currentAudio.duration)}`);
     });
 
     // Обновление прогрессбара во время воспроизведения
     currentAudio.addEventListener('timeupdate', updateTime);
+
+    // Обновление времени при паузе
+    currentAudio.addEventListener('pause', updateTime);
 
     // Обработчик окончания трека
     currentAudio.addEventListener('ended', () => {
@@ -389,6 +430,42 @@ function playAudio(filePath, metadata, index, filename) {
     });
 
     // Обновление громкости при старте трека
+    if (currentAudio) {
+        currentAudio.volume = parseFloat(volumeLevel.style.width) / 100 || 1;
+        currentAudio.addEventListener('volumechange', updateVolumeIcon);
+        console.log(`Громкость установлена на: ${Math.round(currentAudio.volume * 100)}%`);
+    }
+}
+
+function loadTrackIntoPlayer(filePath, metadata, index, filename) {
+    console.log(`Загрузка трека в плеер без воспроизведения: ${filename}`);
+    if (currentAudio) {
+        currentAudio.pause();
+    }
+
+    currentAudio = new Audio(filePath);
+
+    // Обновление UI
+    updatePlayerUI(metadata, filePath, filename);
+
+    // Обновление текущего трека
+    if (currentPlayingTrack) {
+        currentPlayingTrack.classList.remove('playing');
+    }
+    currentPlayingTrack = document.querySelector(`.item-track[data-index="${index}"]`);
+    if (currentPlayingTrack) {
+        currentPlayingTrack.classList.add('playing');
+    }
+
+    // Обновление времени окончания после загрузки метаданных
+    currentAudio.addEventListener('loadedmetadata', () => {
+        timecodeEnd.textContent = formatTime(currentAudio.duration);
+        timecodeSlider.max = currentAudio.duration || 0;
+        updateTime(); // Обновляем время сразу после загрузки метаданных
+        console.log(`Длительность трека: ${formatTime(currentAudio.duration)}`);
+    });
+
+    // Обновление громкости при загрузке трека
     if (currentAudio) {
         currentAudio.volume = parseFloat(volumeLevel.style.width) / 100 || 1;
         currentAudio.addEventListener('volumechange', updateVolumeIcon);
