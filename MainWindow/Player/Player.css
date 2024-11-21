@@ -7,6 +7,7 @@
 }
 
 .player {
+    /*background-color: white;*/
     background: var(--var--background-accent-6);
     background-size: 200%;
     animation: gradientShift 10s infinite normal; /* настраиваем анимацию */
@@ -146,7 +147,7 @@
 .controls-track-local {
     display: flex; /* Используем flex для кнопок управления */
     justify-content: center; /* Центрируем кнопки внутри блока */
-    width: 100%; /* Занимает всю ширину родительского контейнера */
+    width: 20%; /* Занимает всю ширину родительского контейнера */
     margin: 15px 0 8px 0;
 
     /*outline: solid 1px #505050;*/
@@ -162,13 +163,10 @@
     border: none;
     /*font-size: 24px;*/
     cursor: pointer;
-    margin:0 10px 0 10px;
+    margin: 0 10px 0 10px;
     /*outline: solid 1px #505050;*/
 }
 
-.play-btn{
-
-}
 
 .pause-btn{
     display: none;
@@ -209,17 +207,17 @@
 .timecode-slider::-webkit-slider-runnable-track {
     height: 6px;
     border-radius: 10px;
-    background: #ffffff; /* Базовый цвет трека */
+    background: #6e6e6e; /* Базовый цвет трека */
     transition: 0.3s ease-in-out;
 }
 
 /* Стили для ползунка (thumb) */
 .timecode-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 10px;
+    width: 5px;
     height: 10px;
-    background-color: #ffffff;
-    border-radius: 50%;
+    background-color: #000000;
+    border-radius: 20px;
     cursor: pointer;
     margin-top: -2px; /* Центрирование ползунка */
     transition: 0.3s ease-in-out;

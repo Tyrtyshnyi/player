@@ -1,3 +1,29 @@
+::-webkit-scrollbar {
+    width: 2px; /* Ширина полосы прокрутки */
+    cursor: pointer;
+}
+
+::-webkit-scrollbar:hover{
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #494949; /* Цвет фона полосы прокрутки */
+    border-radius: 16px; /* Скругленные углы полосы прокрутки */
+
+    margin-top: 60px;
+    margin-bottom: 50px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #b9b9b9; /* Цвет полосы прокрутки */
+    border-radius: 16px; /* Скругленные углы полосы прокрутки */
+
+}
+
+
+
 :root{
     --var--border-radius: 10px;
     --var--outer-radius: 24px;
@@ -16,7 +42,7 @@
     --var--background-1: #202020;
     --var--background-2: #282828;
     --var--background-3: #3f3f3f;
-    --var--background-4: #505050;
+    --var--background-4: rgb(80, 80, 80);
     --var--background-5: #7c7c7c;
     --var--background-6: #a6a6a6;
 

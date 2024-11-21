@@ -405,11 +405,15 @@ function playAudio(filePath, metadata, index, filename) {
 
     // Обновление времени окончания после загрузки метаданных
     currentAudio.addEventListener('loadedmetadata', () => {
+        console.log('Событие loadedmetadata сработало');
         timecodeEnd.textContent = formatTime(currentAudio.duration);
         timecodeSlider.max = currentAudio.duration || 0;
-        updateTime(); // Обновляем время сразу после загрузки метаданных
-        console.log(`Длительность трека: ${formatTime(currentAudio.duration)}`);
+        timecodeSlider.value = 0;
+        updateTime();
     });
+
+
+
 
     // Обновление прогрессбара во время воспроизведения
     currentAudio.addEventListener('timeupdate', updateTime);
@@ -510,8 +514,7 @@ function updateTime() {
         timecodeSlider.value = currentAudio.currentTime;
         const progressPercent = (currentAudio.currentTime / currentAudio.duration) * 100 || 0;
         timecodeSlider.style.background = `linear-gradient(to right, #00dcff ${progressPercent}%, #707070 ${progressPercent}%)`;
-        // Не рекомендуется логировать каждое обновление времени, чтобы не засорять консоль
-        // console.log(`Текущее время: ${formatTime(currentAudio.currentTime)}`);
+        // console.log(`Обновление времени: ${formatTime(currentAudio.currentTime)} / ${formatTime(currentAudio.duration)}`);
     }
 }
 

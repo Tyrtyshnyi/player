@@ -1,39 +1,33 @@
-.img{
-
-}
 .blur-add-playlist-container{
+    cursor:pointer;
+    display: flex;
+    justify-content: center;
     position: sticky;
     top: 0;
     margin-left: -8px;
     margin-right: -8px;
-    margin-bottom: 35px;
+    /*margin-bottom: 35px;*/
     padding: 8px;
-    background: rgba(63, 63, 63, 0.31);
-    z-index: 1; /* Чтобы поле поиска было над другими элементами */
-    backdrop-filter: blur(10px); /* Эффект размытия */
+
+    background: rgba(73, 73, 73, 0.34);
+    z-index: 1;
+    backdrop-filter: blur(20px);
+
+    transition: var(--var--transition-fast);
 }
 
-/* Кнопка "Add Playlist" */
-.add-playlist-btn {
-    user-select: none;
-    padding: 10px;
-    font-size: 18px;
-
-    background-color: var(--var--background-3);
-    border: none;
-
-    border-radius: var(--var--inner-radius);
-    box-shadow: var(--var--box-shadow);
-    color: #fff;
-    cursor: pointer;
+.blur-add-playlist-container:hover{
+    color:black;
+    background: rgba(190, 190, 190, 0.25);
+    transition: var(--var--transition-fast);
 }
+
 
 /* Контейнер для плейлистов */
 .playlists-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    /*justify-content: center; !* Center the items *!*/
+    /*gap: 20px;*/
 }
 
 /* Плейлист */
@@ -47,6 +41,7 @@
     flex-direction: column;
     justify-content: space-between;
 
+    margin:15px;
     border-radius: var(--var--outer-radius);
     border: var(--var--border);
     box-shadow: var(--var--box-shadow);
@@ -93,32 +88,13 @@
     /*outline: 1px solid red;*/
 }
 
-.playlist-btn {
-    user-select: none;
-    padding: 5px 10px;
-    font-size: 14px;
-    cursor: pointer;
-
-    color: #ffffff;
-    border-radius: var(--var--border-radius);
-    background-color: var(--var--background-5);
-    border: #202020;
-    box-shadow: var(--var--box-shadow);
-
-    transition: var(--var--transition-fast);
-    /*outline: 1px solid red;*/
-}
-.playlist-btn:hover{
-    box-shadow:none;
-    transition: var(--var--transition-fast);
-    background-color: var(--var--background-4);
-}
 
 
 
 .context-playlist-menu{
-    position: absolute;
+    cursor:auto;
 
+    position: absolute;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -130,23 +106,54 @@
     opacity: 0;
     border-radius: var(--var--inner-radius);
     padding: 10px;
-    transition: var(--var--transition-medium);
-    backdrop-filter: blur(15px); /* Эффект размытия */
-    background: rgba(77, 77, 77, 0.1);
+
+    backdrop-filter: blur(10px); /* Эффект размытия */
+    background: rgba(77, 77, 77, 0.4);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.78);
 
-
+    transition: var(--var--transition-medium);
     /*outline:solid red;*/
 }
+
+.context-playlist-menu:hover{
+    background: rgba(54, 54, 54, 0.5);
+    transition: var(--var--transition-medium);
+}
+
+
+.playlist-btn {
+
+    user-select: none;
+    padding: 5px 10px;
+    cursor: pointer;
+
+    color: #ffffff;
+    border-radius: var(--var--border-radius);
+    background-color: rgba(124, 124, 124, 0.45);
+    border: #202020;
+    box-shadow: var(--var--box-shadow);
+
+    font-size:12px;
+
+    transition: var(--var--transition-fast);
+    /*outline: 1px solid red;*/
+}
+.playlist-btn:hover{
+    box-shadow:none;
+    transition: var(--var--transition-fast);
+    background-color: rgba(124, 124, 124, 0.25);
+}
+
+
 .delete-button{
     margin-bottom:10px;
     color: #ffffff;
-    background-color: #ff2e2e;
+    background-color: rgba(255, 0, 0, 0.45);
 }
 
 /* Эффект при наведении на кнопку удаления */
 .delete-button:hover {
-    background-color: rgb(255, 137, 137);
+    background-color: rgba(255, 0, 0, 0.25);
 }
 
 
