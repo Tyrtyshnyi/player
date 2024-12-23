@@ -87,11 +87,7 @@ body {
     transform: scale(0.99);
 }
 
-@keyframes gradientShift {
-    to {
-        background-position: 200% ;
-    }
-}
+
 
 .home-button{
     border: none;

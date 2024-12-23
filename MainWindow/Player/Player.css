@@ -5,6 +5,12 @@
         background-position: -200% ;
     }
 }
+@keyframes gradientShift {
+    to {
+        background-position: 200% ;
+    }
+}
+
 
 .player {
     /*background-color: white;*/
@@ -12,8 +18,6 @@
     background-size: 200%;
     animation: gradientShift 10s infinite normal; /* настраиваем анимацию */
     box-shadow: var(--var--box-shadow);
-
-
 
     user-select: none;
     position: absolute; /* Плеер теперь размещен с помощью absolute */
@@ -76,12 +80,6 @@
     border-radius: 16px;
 }
 
-
-@keyframes metaGradient {
-    to {
-        background-position: -200% ;
-    }
-}
 
 .track-meta {
 
